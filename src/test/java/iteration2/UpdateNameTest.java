@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 public class UpdateNameTest {
     static String userAuthHeaderFirst;
@@ -136,7 +137,18 @@ public class UpdateNameTest {
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
-                .body("customer.name", Matchers.equalTo(updateName));
+                .body("customer.name", equalTo(updateName));
+
+        //Проверка, что имя обновилось
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("Authorization", userAuth)
+                .get("http://localhost:4111/api/v1/customer/profile")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .body("name", equalTo(updateName));
 
     }
 
@@ -148,12 +160,34 @@ public class UpdateNameTest {
                 .header("Authorization", "Basic YWRtaW46YWRtaW4=")
                 .body("""
                         {
-                          "name": "Murka"
+                          "name": "Мурзик"
                         }
                         """)
                 .put("http://localhost:4111/api/v1/customer/profile")
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_FORBIDDEN);
+
+        //Проверка, что имя не поменялось у первого пользователя
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("Authorization", userAuthHeaderFirst)
+                .get("http://localhost:4111/api/v1/customer/profile")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .body("name", Matchers.not(equalTo("Мурзик")));
+
+        //Проверка, что имя не поменялось у второго пользователя
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("Authorization", userAuthHeaderSecond)
+                .get("http://localhost:4111/api/v1/customer/profile")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .body("name", Matchers.not(equalTo("Мурзик")));
     }
 }
