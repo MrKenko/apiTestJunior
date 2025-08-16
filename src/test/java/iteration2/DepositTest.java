@@ -7,7 +7,6 @@ import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -209,8 +208,18 @@ public static Stream<Arguments> userValidDeposit(){
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
-                .body("balance", Matchers.equalTo(resultBalance))
-        ;
+                .body("balance", Matchers.equalTo(resultBalance));
+
+        //Проверка, что баланс обновился
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("Authorization", userAuthHeaderFirst)
+                .get("http://localhost:4111/api/v1/customer/accounts")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .body("balance[0]", Matchers.equalTo(resultBalance));
     }
 
     public static Stream<Number> invalidDepositData() {
@@ -235,11 +244,21 @@ public static Stream<Arguments> userValidDeposit(){
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_BAD_REQUEST);
+
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("Authorization", userAuthHeaderFirst)
+                .get("http://localhost:4111/api/v1/customer/accounts")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .body("balance[0]", Matchers.equalTo(0.0f));
     }
-    public static Stream<String> invalidTokenData() {
-        return Stream.of("Basic YWRtaW46YWRtaW4=", //токен Админа
-                userAuthHeaderSecond,                      //токен другого пользователя
-                userAuthHeaderWithOutAccount               //токен пользователя без аккаунт-счета
+    public static Stream<Arguments> invalidTokenData() {
+        return Stream.of(Arguments.of("Basic YWRtaW46YWRtaW4="), //токен Админа
+                Arguments.of(userAuthHeaderSecond),                      //токен другого пользователя
+               Arguments.of(userAuthHeaderWithOutAccount)               //токен пользователя без аккаунт-счета
                 );
     }
     @ParameterizedTest
@@ -259,6 +278,16 @@ public static Stream<Arguments> userValidDeposit(){
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_FORBIDDEN);
+
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("Authorization", userAuthHeaderFirst)
+                .get("http://localhost:4111/api/v1/customer/accounts")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .body("balance[0]", Matchers.equalTo(0.0f));
     }
 
 }

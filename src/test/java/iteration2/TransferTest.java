@@ -211,15 +211,15 @@ public class TransferTest {
 
     public static Stream<Arguments> userValidTransferData() {
         return Stream.of(
-                Arguments.of(userAuthHeaderFirst, userAuthHeaderSecond, userIdFirst, userIdSecond, 50.0, 50.0f, 50.0f),
-                Arguments.of(userAuthHeaderFirst, userAuthHeaderSecond, userIdFirst, userIdSecond, 0.01, 0.01f, 50.01f),
-                Arguments.of(userAuthHeaderSecond, userAuthHeaderSecond, userIdSecond, userIdFirst, 10, 10.0f, 40.01f)
+                Arguments.of(userAuthHeaderFirst, userAuthHeaderSecond, userIdFirst, userIdSecond, 50.0, 50.0f, 250.0f, 50.0f),
+                Arguments.of(userAuthHeaderFirst, userAuthHeaderSecond, userIdFirst, userIdSecond, 0.01, 0.01f, 249.99f, 50.01f),
+                Arguments.of(userAuthHeaderSecond, userAuthHeaderFirst, userIdSecond, userIdFirst, 10, 10.0f,  40.01f, 259.99f)
         );
     }
 
     @ParameterizedTest
     @MethodSource("userValidTransferData")
-    public void userCanTransfer(String userAuthSender, String userAuthReceiver, int senderId, int receiverId, double transferBalance, float resultAmount, float resultBalance) {
+    public void userCanTransfer(String userAuthSender, String userAuthReceiver, int senderId, int receiverId, double transferBalance, float resultAmount, float resultBalanceFirstUser, float resultBalanceSecondUser) {
         String body = String.format(Locale.ENGLISH, """
                   {
                   "senderAccountId": %d,
@@ -239,7 +239,19 @@ public class TransferTest {
                 .statusCode(HttpStatus.SC_OK)
                 .body("amount", Matchers.equalTo(resultAmount));
 
-        //проверка баланса счета
+        //проверка баланса счета первого юзера
+
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("Authorization", userAuthSender)
+                .get("http://localhost:4111/api/v1/customer/accounts")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .body("balance[0]", Matchers.equalTo(resultBalanceFirstUser));
+
+        // Проверка баланса счета второго юзера
 
         given()
                 .contentType(ContentType.JSON)
@@ -249,7 +261,7 @@ public class TransferTest {
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
-                .body("balance[0]", Matchers.equalTo(resultBalance));
+                .body("balance[0]", Matchers.equalTo(resultBalanceSecondUser));
 
     }
 
@@ -282,6 +294,27 @@ public class TransferTest {
                 .assertThat()
                 .statusCode(HttpStatus.SC_BAD_REQUEST);
 
+// Проверка, что баланс не поменялся
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("Authorization", userAuthHeaderFirst)
+                .get("http://localhost:4111/api/v1/customer/accounts")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .body("balance[0]", Matchers.equalTo(259.99f));
+
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("Authorization", userAuthHeaderSecond)
+                .get("http://localhost:4111/api/v1/customer/accounts")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .body("balance[0]", Matchers.equalTo(40.01f));
+
     }
 
     public static Stream<Arguments> userInvalidTokenData() {
@@ -313,6 +346,26 @@ public class TransferTest {
                 .assertThat()
                 .statusCode(HttpStatus.SC_FORBIDDEN);
 
+//Проверка, что баланс не поменялся
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("Authorization", userAuthHeaderFirst)
+                .get("http://localhost:4111/api/v1/customer/accounts")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .body("balance[0]", Matchers.equalTo(259.99f));
+
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("Authorization", userAuthHeaderSecond)
+                .get("http://localhost:4111/api/v1/customer/accounts")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .body("balance[0]", Matchers.equalTo(40.01f));
     }
 
 }
