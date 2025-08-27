@@ -1,211 +1,145 @@
 package iteration2;
 
-import io.restassured.RestAssured;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
-import io.restassured.http.ContentType;
-import org.apache.http.HttpStatus;
-import org.hamcrest.Matchers;
+import generators.RandomData;
+import models.*;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import requests.*;
+import specs.RequestSpecs;
+import specs.ResponseSpecs;
 
-import java.util.List;
-import java.util.Locale;
 import java.util.stream.Stream;
 
-import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.within;
 
-public class TransferTest {
+public class TransferTest extends BaseTest {
     static String userAuthHeaderFirst;
     static String userAuthHeaderSecond;
     static String userAuthHeaderWithOutAccount;
-    static String userNameFirst;
-    static String userNameSecond;
-    static String userNameWithOutAccount;
     static int userIdFirst;
     static int userIdSecond;
     static int userIdWithOutAccount;
+    static int startDeposit = 300;
 
-    @BeforeAll
-    public static void setupRestAssured() {
-        RestAssured.filters(
-                List.of(new RequestLoggingFilter(),
-                        new ResponseLoggingFilter())
-        );
-    }
 
     @BeforeAll
     public static void setupUserName() {
-        userNameFirst = "Kqsate59982";
-        userNameSecond = "Kwsate69982";
-        userNameWithOutAccount = "Kesate79982";
-        //создание пользователя 1
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", "Basic YWRtaW46YWRtaW4=")
-                .body("""
-                        {
-                          "username": "%s",
-                          "password": "Roma1123!",
-                          "role": "USER"
-                        }
-                        """.formatted(userNameFirst))
-                .post("http://localhost:4111/api/v1/admin/users")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_CREATED);
-        //получение токена
-        userAuthHeaderFirst = given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body("""
-                        
-                        {
-                              "username": "%s",
-                              "password": "Roma1123!"
-                        }
-                        """.formatted(userNameFirst))
-                .post("http://localhost:4111/api/v1/auth/login")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
+        CreateUserRequest userRequestFirst = CreateUserRequest.builder()
+                .username(RandomData.getUsername())
+                .password(RandomData.getPassword())
+                .role(UserRole.USER.toString())
+                .build();
+        new AdminCreateUserRequester(RequestSpecs.adminSpec(),
+                ResponseSpecs.entityWasCreated())
+                .post(userRequestFirst);
+
+        userAuthHeaderFirst = new LoginUserRequester(
+                RequestSpecs.unauthSpec(),
+                ResponseSpecs.requestReturnOk())
+                .post(LoginUserRequest.builder()
+                        .username(userRequestFirst.getUsername())
+                        .password(userRequestFirst.getPassword())
+                        .build())
                 .extract()
                 .header("Authorization");
 
-        userIdFirst = given()
-                .header("Authorization", userAuthHeaderFirst)
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .post("http://localhost:4111/api/v1/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_CREATED)
+        userIdFirst = new CreateAccountRequester(
+                RequestSpecs.userSpec(userAuthHeaderFirst),
+                ResponseSpecs.entityWasCreated())
+                .post(null)
                 .extract()
                 .path("id");
 
+        // Второй юзер
+        CreateUserRequest userRequestSecond = CreateUserRequest.builder()
+                .username(RandomData.getUsername())
+                .password(RandomData.getPassword())
+                .role(UserRole.USER.toString())
+                .build();
+        new AdminCreateUserRequester(RequestSpecs.adminSpec(),
+                ResponseSpecs.entityWasCreated())
+                .post(userRequestSecond);
 
-        //Создание второго пользователя с аккаунтом-счётом
-
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", "Basic YWRtaW46YWRtaW4=")
-                .body("""
-                        {
-                          "username": "%s",
-                          "password": "Roma1123!",
-                          "role": "USER"
-                        }
-                        """.formatted(userNameSecond))
-                .post("http://localhost:4111/api/v1/admin/users")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_CREATED);
-        //получение токена
-        userAuthHeaderSecond = given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body("""
-                        
-                        {
-                              "username": "%s",
-                              "password": "Roma1123!"
-                        }
-                        """.formatted(userNameSecond))
-                .post("http://localhost:4111/api/v1/auth/login")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
+        userAuthHeaderSecond = new LoginUserRequester(
+                RequestSpecs.unauthSpec(),
+                ResponseSpecs.requestReturnOk())
+                .post(LoginUserRequest.builder()
+                        .username(userRequestSecond.getUsername())
+                        .password(userRequestSecond.getPassword())
+                        .build())
                 .extract()
                 .header("Authorization");
 
-        userIdSecond = given()
-                .header("Authorization", userAuthHeaderSecond)
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .post("http://localhost:4111/api/v1/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_CREATED)
+        userIdSecond = new CreateAccountRequester(
+                RequestSpecs.userSpec(userAuthHeaderSecond),
+                ResponseSpecs.entityWasCreated())
+                .post(null)
                 .extract()
                 .path("id");
 
+        // Третий юзер
+        CreateUserRequest userRequestWithOutAccount = CreateUserRequest.builder()
+                .username(RandomData.getUsername())
+                .password(RandomData.getPassword())
+                .role(UserRole.USER.toString())
+                .build();
+        new AdminCreateUserRequester(RequestSpecs.adminSpec(),
+                ResponseSpecs.entityWasCreated())
+                .post(userRequestWithOutAccount);
 
-        // Создание пользователя без акаунт-счета
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", "Basic YWRtaW46YWRtaW4=")
-                .body("""
-                        {
-                          "username": "%s",
-                          "password": "Roma1123!",
-                          "role": "USER"
-                        }
-                        """.formatted(userNameWithOutAccount))
-                .post("http://localhost:4111/api/v1/admin/users")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_CREATED);
-        //получение токена
-        userAuthHeaderWithOutAccount = given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body("""
-                        
-                        {
-                              "username": "%s",
-                              "password": "Roma1123!"
-                        }
-                        """.formatted(userNameWithOutAccount))
-                .post("http://localhost:4111/api/v1/auth/login")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
+        userAuthHeaderWithOutAccount = new LoginUserRequester(
+                RequestSpecs.unauthSpec(),
+                ResponseSpecs.requestReturnOk())
+                .post(LoginUserRequest.builder()
+                        .username(userRequestWithOutAccount.getUsername())
+                        .password(userRequestWithOutAccount.getPassword())
+                        .build())
                 .extract()
                 .header("Authorization");
 
-        userIdWithOutAccount = given()
-                .header("Authorization", userAuthHeaderWithOutAccount)
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .get("http://localhost:4111/api/v1/customer/profile")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
+        userIdWithOutAccount = new UserProfileRequester(
+                RequestSpecs.userSpec(userAuthHeaderWithOutAccount),
+                ResponseSpecs.requestReturnOk())
+                .get(null)
                 .extract()
                 .path("id");
 
-//депозит первому юзеру
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthHeaderFirst)
-                .body("""
-                        {
-                        "id": %d,
-                        "balance": 300
-                        }
-                        """.formatted(userIdFirst))
-                .post("http://localhost:4111/api/v1/accounts/deposit")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("balance", Matchers.equalTo(300.0f));
+        double userFirstBalanceBeforeDeposit = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthHeaderFirst),
+                ResponseSpecs.requestReturnOk())
+                .get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0)
+                .getBalance();
 
-//Проверка, что баланс обновился
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthHeaderFirst)
-                .get("http://localhost:4111/api/v1/customer/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("balance[0]", Matchers.equalTo(300.0f));
+
+        DepositUserRequest depositRequest = DepositUserRequest.builder()
+                .id(userIdFirst)
+                .balance(startDeposit)
+                .build();
+
+        new DepositRequester(RequestSpecs.userSpec(userAuthHeaderFirst), ResponseSpecs.requestReturnOk())
+                .post(depositRequest);
+
+        DepositUserResponse userFirstBalanceAfterDeposit = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthHeaderFirst),
+                ResponseSpecs.requestReturnOk())
+                .get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0);
+
+        assertThat(userFirstBalanceAfterDeposit.getBalance())
+                .as("Баланс увеличился на сумму перевода")
+                .isCloseTo(userFirstBalanceBeforeDeposit + startDeposit, within(0.0001));
+        ;
     }
 
 
@@ -219,107 +153,224 @@ public class TransferTest {
 
     @ParameterizedTest
     @MethodSource("userValidTransferData")
-    public void userCanTransfer(String userAuthSender, String userAuthReceiver, int senderId, int receiverId, double transferBalance, float resultAmount, float resultBalanceFirstUser, float resultBalanceSecondUser) {
-        String body = String.format(Locale.ENGLISH, """
-                  {
-                  "senderAccountId": %d,
-                  "receiverAccountId": %d,
-                  "amount": %.2f
-                }
-                """, senderId, receiverId, transferBalance);
-//перевод
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthSender)
-                .body(body)
-                .post("http://localhost:4111/api/v1/accounts/transfer")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("amount", Matchers.equalTo(resultAmount));
+    public void userCanTransfer(String userAuthSender, String userAuthReceiver, int senderId, int receiverId, double transferBalance) {
 
-        //проверка баланса счета первого юзера
+        //  Балансы ДО перевода
+        double senderBalanceBefore = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthSender),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0)
+                .getBalance();
 
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthSender)
-                .get("http://localhost:4111/api/v1/customer/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("balance[0]", Matchers.equalTo(resultBalanceFirstUser));
+        double receiverBalanceBefore = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthReceiver),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0)
+                .getBalance();
 
-        // Проверка баланса счета второго юзера
+        //Делаем перевод
 
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthReceiver)
-                .get("http://localhost:4111/api/v1/customer/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("balance[0]", Matchers.equalTo(resultBalanceSecondUser));
+        TransferUserRequest transferUserRequest = TransferUserRequest.builder()
+                .senderAccountId(senderId)
+                .receiverAccountId(receiverId)
+                .amount(transferBalance)
+                .build();
 
-    }
+        new TransferUserRequester(RequestSpecs.userSpec(userAuthSender), ResponseSpecs.requestReturnOk())
+                .post(transferUserRequest);
+
+        //Балансы после перевода
+
+        DepositUserResponse senderAccountAfter = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthSender),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0);
+
+        DepositUserResponse receiverAccountAfter = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthReceiver),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0);
+
+        softly.assertThat(senderAccountAfter.getBalance())
+                .as("Баланс отправителя уменьшился на сумму перевода")
+                .isCloseTo(senderBalanceBefore - transferBalance, within(0.0001));
+
+        softly.assertThat(receiverAccountAfter.getBalance())
+                .as("Баланс получателя увеличился на сумму перевода")
+                .isCloseTo(receiverBalanceBefore + transferBalance, within(0.0001));
+}
 
     public static Stream<Arguments> userInvalidTransferData() {
         return Stream.of(
-                Arguments.of(userAuthHeaderFirst, userIdFirst, userIdSecond, 0),
-                Arguments.of(userAuthHeaderFirst, userIdFirst, userIdWithOutAccount, 50), //перевод на id без аккаунта
-                Arguments.of(userAuthHeaderFirst,  userIdFirst, userIdSecond, -100)
+                Arguments.of(userAuthHeaderFirst, userAuthHeaderSecond, userIdFirst, userIdSecond, 0),
+                Arguments.of(userAuthHeaderFirst, userAuthHeaderSecond, userIdFirst, userIdSecond, -100)
         );
     }
 
     @ParameterizedTest
     @MethodSource("userInvalidTransferData")
-    public void userInvalidTransfer(String userAuthSender, int senderId, int receiverId, double transferBalance) {
-        String body = String.format(Locale.ENGLISH, """
-                  {
-                  "senderAccountId": %d,
-                  "receiverAccountId": %d,
-                  "amount": %.2f
-                }
-                """, senderId, receiverId, transferBalance);
-//перевод
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthSender)
-                .body(body)
-                .post("http://localhost:4111/api/v1/accounts/transfer")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_BAD_REQUEST);
+    public void userInvalidTransfer(String userAuthSender, String userAuthReceiver, int senderId, int receiverId, double transferBalance) {
+        //  Балансы ДО перевода
+        double senderBalanceBefore = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthSender),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0)
+                .getBalance();
 
-// Проверка, что баланс не поменялся
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthHeaderFirst)
-                .get("http://localhost:4111/api/v1/customer/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("balance[0]", Matchers.equalTo(259.99f));
+        double receiverBalanceBefore = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthReceiver),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0)
+                .getBalance();
 
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthHeaderSecond)
-                .get("http://localhost:4111/api/v1/customer/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("balance[0]", Matchers.equalTo(40.01f));
+        //Делаем перевод
 
+        TransferUserRequest transferUserRequest = TransferUserRequest.builder()
+                .senderAccountId(senderId)
+                .receiverAccountId(receiverId)
+                .amount(transferBalance)
+                .build();
+
+        new TransferUserRequester(RequestSpecs.userSpec(userAuthSender), ResponseSpecs.requestReturnsBadRequestText("Invalid transfer: insufficient funds or invalid accounts"))
+                .post(transferUserRequest);
+
+        //Балансы после перевода
+        DepositUserResponse senderAccountAfter = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthSender),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0);
+
+        DepositUserResponse receiverAccountAfter = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthReceiver),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0);
+
+        softly.assertThat(senderAccountAfter.getBalance())
+                .as("Баланс отправителя не уменьшился на сумму перевода")
+                .isCloseTo(senderBalanceBefore, within(0.0001));
+
+        softly.assertThat(receiverAccountAfter.getBalance())
+                .as("Баланс получателя не увеличился на сумму перевода")
+                .isCloseTo(receiverBalanceBefore, within(0.0001));
+
+
+    }
+    @Test
+    public void userInvalidTransferToUserWithoutAccount() {
+        // У отправителя баланс ДО
+        double senderBalanceBefore = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthHeaderFirst),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0)
+                .getBalance();
+
+        // Перевод на юзера без аккаунта
+        TransferUserRequest transferUserRequest = TransferUserRequest.builder()
+                .senderAccountId(userIdFirst)
+                .receiverAccountId(userIdWithOutAccount)
+                .amount(50)
+                .build();
+
+        new TransferUserRequester(
+                RequestSpecs.userSpec(userAuthHeaderFirst),
+                ResponseSpecs.requestReturnsBadRequestText("Invalid transfer: insufficient funds or invalid accounts")
+        ).post(transferUserRequest);
+
+        // Баланс отправителя после перевода (не должен измениться)
+        double senderBalanceAfter = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthHeaderFirst),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0)
+                .getBalance();
+
+        softly.assertThat(senderBalanceAfter)
+                .as("Баланс отправителя не должен измениться при переводе на пользователя без аккаунта")
+                .isCloseTo(senderBalanceBefore, within(0.0001));
+    }
+
+    @Test
+    public void userWithoutAccountCantTransfer() {
+        // У юреза с аккаунтом баланс ДО
+        double senderBalanceBefore = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthHeaderFirst),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0)
+                .getBalance();
+
+        // Перевод на юзера без аккаунта
+        TransferUserRequest transferUserRequest = TransferUserRequest.builder()
+                .senderAccountId(userIdWithOutAccount)
+                .receiverAccountId(userIdFirst)
+                .amount(50)
+                .build();
+
+        new TransferUserRequester(
+                RequestSpecs.userSpec(userAuthHeaderWithOutAccount),
+                ResponseSpecs.requestReturnsForbiddenDeposit()
+        ).post(transferUserRequest);
+
+        // Баланс пользователя с аккаунтом после перевода (не должен измениться)
+        double senderBalanceAfter = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthHeaderFirst),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0)
+                .getBalance();
+
+        softly.assertThat(senderBalanceAfter)
+                .as("Баланс пользователя с аккаунтом не должен измениться при переводе на пользователя без аккаунта")
+                .isCloseTo(senderBalanceBefore, within(0.0001));
     }
 
     public static Stream<Arguments> userInvalidTokenData() {
         return Stream.of(
-                Arguments.of(userAuthHeaderWithOutAccount, userIdWithOutAccount, userIdFirst, 50), //перевод с id без аккаунта
                 Arguments.of(userAuthHeaderFirst, userIdSecond, userIdFirst, 50), //перевод с другого id на свой
                 Arguments.of("Basic YWRtaW46YWRtaW4=",  userIdFirst, userIdSecond, 50)  //токен админа
         );
@@ -328,44 +379,67 @@ public class TransferTest {
     @ParameterizedTest
     @MethodSource("userInvalidTokenData")
     public void userInvalidTransferToken(String userAuthSender, int senderId, int receiverId, double transferBalance) {
-        String body = String.format(Locale.ENGLISH, """
-                  {
-                  "senderAccountId": %d,
-                  "receiverAccountId": %d,
-                  "amount": %.2f
-                }
-                """, senderId, receiverId, transferBalance);
-//перевод
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthSender)
-                .body(body)
-                .post("http://localhost:4111/api/v1/accounts/transfer")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_FORBIDDEN);
+        //  Балансы ДО перевода
+        double senderBalanceBefore = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthHeaderFirst),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0)
+                .getBalance();
 
-//Проверка, что баланс не поменялся
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthHeaderFirst)
-                .get("http://localhost:4111/api/v1/customer/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("balance[0]", Matchers.equalTo(259.99f));
+        double receiverBalanceBefore = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthHeaderSecond),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0)
+                .getBalance();
 
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthHeaderSecond)
-                .get("http://localhost:4111/api/v1/customer/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("balance[0]", Matchers.equalTo(40.01f));
+        //Делаем перевод
+
+        TransferUserRequest transferUserRequest = TransferUserRequest.builder()
+                .senderAccountId(senderId)
+                .receiverAccountId(receiverId)
+                .amount(transferBalance)
+                .build();
+
+        new TransferUserRequester(RequestSpecs.userSpec(userAuthSender), ResponseSpecs.requestReturnsForbiddenDeposit())
+                .post(transferUserRequest);
+
+        //Балансы после перевода
+
+        double senderBalanceAfter = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthHeaderFirst),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0)
+                .getBalance();
+
+        softly.assertThat(senderBalanceAfter)
+                .as("Баланс пользователя с аккаунтом не должен измениться при переводе на пользователя без аккаунта")
+                .isCloseTo(senderBalanceBefore, within(0.0001));
+
+        double receiverBalanceAfter = new GetUserAccountRequester(
+                RequestSpecs.userSpec(userAuthHeaderSecond),
+                ResponseSpecs.requestReturnOk()
+        ).get(null)
+                .extract()
+                .jsonPath()
+                .getList("", DepositUserResponse.class)
+                .get(0)
+                .getBalance();
+
+        softly.assertThat(receiverBalanceAfter)
+                .as("Баланс пользователя не должен измениться при переводе на пользователя без аккаунта")
+                .isCloseTo(receiverBalanceBefore, within(0.0001));
     }
 
 }

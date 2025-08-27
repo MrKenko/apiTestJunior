@@ -1,108 +1,63 @@
 package iteration2;
 
-import io.restassured.RestAssured;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
-import io.restassured.http.ContentType;
-import org.apache.http.HttpStatus;
-import org.hamcrest.Matchers;
+import generators.RandomData;
+import models.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import requests.AdminCreateUserRequester;
+import requests.LoginUserRequester;
+import requests.UserProfileRequester;
+import specs.RequestSpecs;
+import specs.ResponseSpecs;
 
-import java.util.List;
 import java.util.stream.Stream;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
-
-public class UpdateNameTest {
+public class UpdateNameTest extends BaseTest{
     static String userAuthHeaderFirst;
     static String userAuthHeaderSecond;
-    static String userNameFirst;
-    static String userNameSecond;
-
 
     @BeforeAll
-    public static void setupRestAssured() {
-        RestAssured.filters(
-                List.of(new RequestLoggingFilter(),
-                        new ResponseLoggingFilter())
-        );
-    }
+    public static void usersData(){
+        CreateUserRequest userRequestFirst = CreateUserRequest.builder()
+                .username(RandomData.getUsername())
+                .password(RandomData.getPassword())
+                .role(UserRole.USER.toString())
+                .build();
 
-    @BeforeAll
-    public static void setupUserName() {
-        userNameFirst = "R11w1aq1q112171";
-        userNameSecond = "R11w1aq1q122171";
+        new AdminCreateUserRequester(RequestSpecs.adminSpec(),
+                ResponseSpecs.entityWasCreated())
+                .post(userRequestFirst);
 
-        //создание пользователя 1
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", "Basic YWRtaW46YWRtaW4=")
-                .body("""
-                        {
-                          "username": "%s",
-                          "password": "Roma1123!",
-                          "role": "USER"
-                        }
-                        """.formatted(userNameFirst))
-                .post("http://localhost:4111/api/v1/admin/users")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_CREATED);
-        //получение токена
-        userAuthHeaderFirst = given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body("""
-                        
-                        {
-                              "username": "%s",
-                              "password": "Roma1123!"
-                        }
-                        """.formatted(userNameFirst))
-                .post("http://localhost:4111/api/v1/auth/login")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
+        userAuthHeaderFirst = new LoginUserRequester(
+                RequestSpecs.unauthSpec(),
+                ResponseSpecs.requestReturnOk())
+                .post(LoginUserRequest.builder()
+                        .username(userRequestFirst.getUsername())
+                        .password(userRequestFirst.getPassword())
+                        .build())
                 .extract()
                 .header("Authorization");
 
-        //создание пользователя 2
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", "Basic YWRtaW46YWRtaW4=")
-                .body("""
-                        {
-                          "username": "%s",
-                          "password": "Roma1123!",
-                          "role": "USER"
-                        }
-                        """.formatted(userNameSecond))
-                .post("http://localhost:4111/api/v1/admin/users")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_CREATED);
-        //получение токена
-        userAuthHeaderSecond = given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body("""
-                        
-                        {
-                              "username": "%s",
-                              "password": "Roma1123!"
-                        }
-                        """.formatted(userNameSecond))
-                .post("http://localhost:4111/api/v1/auth/login")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
+        // Второй юзер
+        CreateUserRequest userRequestSecond = CreateUserRequest.builder()
+                .username(RandomData.getUsername())
+                .password(RandomData.getPassword())
+                .role(UserRole.USER.toString())
+                .build();
+        new AdminCreateUserRequester(RequestSpecs.adminSpec(),
+                ResponseSpecs.entityWasCreated())
+                .post(userRequestSecond);
+
+        userAuthHeaderSecond = new LoginUserRequester(
+                RequestSpecs.unauthSpec(),
+                ResponseSpecs.requestReturnOk())
+                .post(LoginUserRequest.builder()
+                        .username(userRequestSecond.getUsername())
+                        .password(userRequestSecond.getPassword())
+                        .build())
                 .extract()
                 .header("Authorization");
     }
@@ -124,70 +79,43 @@ public class UpdateNameTest {
     @ParameterizedTest
     @MethodSource("userValidNameAccountData")
     public void userCanUpdateAccountName(String userAuth, String updateName) {
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuth)
-                .body("""
-                        {
-                          "name": "%s"
-                        }
-                        """.formatted(updateName))
-                .put("http://localhost:4111/api/v1/customer/profile")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("customer.name", equalTo(updateName));
+        UpdateProfileNameRequest updateProfileNameRequest = UpdateProfileNameRequest.builder()
+                .name(updateName)
+                .build();
 
-        //Проверка, что имя обновилось
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuth)
-                .get("http://localhost:4111/api/v1/customer/profile")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("name", equalTo(updateName));
+        UpdateProfileNameResponse response = new UserProfileRequester(RequestSpecs.userSpec(userAuth), ResponseSpecs.requestReturnOk())
+                .put(updateProfileNameRequest)
+               .extract()
+                .as(UpdateProfileNameResponse.class);
 
+        // Проверяем, что имя обновилось
+        softly.assertThat(response.getCustomer().getName())
+                .as("Имя в профиле должно обновиться")
+                .isEqualTo(updateName);
     }
+
+
 
     @Test
     public void updateNameWithInvalidToken() {
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", "Basic YWRtaW46YWRtaW4=")
-                .body("""
-                        {
-                          "name": "Мурзик"
-                        }
-                        """)
-                .put("http://localhost:4111/api/v1/customer/profile")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_FORBIDDEN);
+        UpdateProfileNameRequest updateProfileNameRequest = UpdateProfileNameRequest.builder()
+                .name("Мурзик")
+                .build();
 
-        //Проверка, что имя не поменялось у первого пользователя
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthHeaderFirst)
-                .get("http://localhost:4111/api/v1/customer/profile")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("name", Matchers.not(equalTo("Мурзик")));
+        new UserProfileRequester(RequestSpecs.adminSpec(), ResponseSpecs.requestReturnsForbiddenDeposit())
+                .put(updateProfileNameRequest);
 
-        //Проверка, что имя не поменялось у второго пользователя
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthHeaderSecond)
-                .get("http://localhost:4111/api/v1/customer/profile")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("name", Matchers.not(equalTo("Мурзик")));
+        CreateUserResponse response = new UserProfileRequester(RequestSpecs.userSpec(userAuthHeaderFirst), ResponseSpecs.requestReturnOk())
+                .get(null)
+                .extract()
+                .as(CreateUserResponse.class);
+
+
+
+        // Проверяем, что имя не обновилось
+        softly.assertThat(response.getName())
+                .as("Имя в профиле не должно обновиться")
+                .isNotEqualTo("Мурзик");
+
     }
 }
