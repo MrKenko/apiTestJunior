@@ -1,13 +1,16 @@
 package iteration2;
 
-import generators.RandomData;
 import models.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import requests.*;
+import requests.skelethon.Endpoint;
+import requests.skelethon.reauests.CrudRequester;
+import requests.skelethon.reauests.ValidatedCrudRequester;
+import requests.steps.AdminSteps;
+import requests.steps.UserSteps;
 import specs.RequestSpecs;
 import specs.ResponseSpecs;
 
@@ -28,115 +31,37 @@ public class TransferTest extends BaseTest {
 
     @BeforeAll
     public static void setupUserName() {
-        CreateUserRequest userRequestFirst = CreateUserRequest.builder()
-                .username(RandomData.getUsername())
-                .password(RandomData.getPassword())
-                .role(UserRole.USER.toString())
-                .build();
-        new AdminCreateUserRequester(RequestSpecs.adminSpec(),
-                ResponseSpecs.entityWasCreated())
-                .post(userRequestFirst);
-
-        userAuthHeaderFirst = new LoginUserRequester(
-                RequestSpecs.unauthSpec(),
-                ResponseSpecs.requestReturnOk())
-                .post(LoginUserRequest.builder()
-                        .username(userRequestFirst.getUsername())
-                        .password(userRequestFirst.getPassword())
-                        .build())
-                .extract()
-                .header("Authorization");
-
-        userIdFirst = new CreateAccountRequester(
-                RequestSpecs.userSpec(userAuthHeaderFirst),
-                ResponseSpecs.entityWasCreated())
-                .post(null)
-                .extract()
-                .path("id");
+        // Первый юзер
+        CreateUserRequest userRequestFirst = AdminSteps.createUser();
+        userAuthHeaderFirst = UserSteps.loginAndGetToken(userRequestFirst);
+        userIdFirst = UserSteps.createAccount(userAuthHeaderFirst);
 
         // Второй юзер
-        CreateUserRequest userRequestSecond = CreateUserRequest.builder()
-                .username(RandomData.getUsername())
-                .password(RandomData.getPassword())
-                .role(UserRole.USER.toString())
-                .build();
-        new AdminCreateUserRequester(RequestSpecs.adminSpec(),
-                ResponseSpecs.entityWasCreated())
-                .post(userRequestSecond);
+        CreateUserRequest userRequestSecond = AdminSteps.createUser();
+        userAuthHeaderSecond = UserSteps.loginAndGetToken(userRequestSecond);
+        userIdSecond = UserSteps.createAccount(userAuthHeaderSecond);
 
-        userAuthHeaderSecond = new LoginUserRequester(
-                RequestSpecs.unauthSpec(),
-                ResponseSpecs.requestReturnOk())
-                .post(LoginUserRequest.builder()
-                        .username(userRequestSecond.getUsername())
-                        .password(userRequestSecond.getPassword())
-                        .build())
-                .extract()
-                .header("Authorization");
-
-        userIdSecond = new CreateAccountRequester(
-                RequestSpecs.userSpec(userAuthHeaderSecond),
-                ResponseSpecs.entityWasCreated())
-                .post(null)
-                .extract()
-                .path("id");
 
         // Третий юзер
-        CreateUserRequest userRequestWithOutAccount = CreateUserRequest.builder()
-                .username(RandomData.getUsername())
-                .password(RandomData.getPassword())
-                .role(UserRole.USER.toString())
-                .build();
-        new AdminCreateUserRequester(RequestSpecs.adminSpec(),
-                ResponseSpecs.entityWasCreated())
-                .post(userRequestWithOutAccount);
+        CreateUserRequest userRequestWithOutAccount = AdminSteps.createUser();
+        userAuthHeaderWithOutAccount = UserSteps.loginAndGetToken(userRequestWithOutAccount);
+        userIdWithOutAccount = UserSteps.getUserProfile(userAuthHeaderWithOutAccount);
 
-        userAuthHeaderWithOutAccount = new LoginUserRequester(
-                RequestSpecs.unauthSpec(),
-                ResponseSpecs.requestReturnOk())
-                .post(LoginUserRequest.builder()
-                        .username(userRequestWithOutAccount.getUsername())
-                        .password(userRequestWithOutAccount.getPassword())
-                        .build())
-                .extract()
-                .header("Authorization");
+        // делаем депозит первому юзеру и проверяем что баланс поменялся
 
-        userIdWithOutAccount = new UserProfileRequester(
-                RequestSpecs.userSpec(userAuthHeaderWithOutAccount),
-                ResponseSpecs.requestReturnOk())
-                .get(null)
-                .extract()
-                .path("id");
-
-        double userFirstBalanceBeforeDeposit = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthHeaderFirst),
-                ResponseSpecs.requestReturnOk())
-                .get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0)
-                .getBalance();
-
+        double userFirstBalanceBeforeDeposit = UserSteps.getUserBalance(userAuthHeaderFirst);
 
         DepositUserRequest depositRequest = DepositUserRequest.builder()
                 .id(userIdFirst)
                 .balance(startDeposit)
                 .build();
 
-        new DepositRequester(RequestSpecs.userSpec(userAuthHeaderFirst), ResponseSpecs.requestReturnOk())
+        new ValidatedCrudRequester<DepositUserRequest>(RequestSpecs.userSpec(userAuthHeaderFirst), Endpoint.DEPOSIT, ResponseSpecs.requestReturnOk())
                 .post(depositRequest);
 
-        DepositUserResponse userFirstBalanceAfterDeposit = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthHeaderFirst),
-                ResponseSpecs.requestReturnOk())
-                .get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0);
+        double userFirstBalanceAfterDeposit = UserSteps.getUserBalance(userAuthHeaderFirst);
 
-        assertThat(userFirstBalanceAfterDeposit.getBalance())
+        assertThat(userFirstBalanceAfterDeposit)
                 .as("Баланс увеличился на сумму перевода")
                 .isCloseTo(userFirstBalanceBeforeDeposit + startDeposit, within(0.0001));
         ;
@@ -156,62 +81,23 @@ public class TransferTest extends BaseTest {
     public void userCanTransfer(String userAuthSender, String userAuthReceiver, int senderId, int receiverId, double transferBalance) {
 
         //  Балансы ДО перевода
-        double senderBalanceBefore = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthSender),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0)
-                .getBalance();
-
-        double receiverBalanceBefore = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthReceiver),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0)
-                .getBalance();
+        double senderBalanceBefore = UserSteps.getUserBalance(userAuthSender);
+        double receiverBalanceBefore = UserSteps.getUserBalance(userAuthReceiver);
 
         //Делаем перевод
-
-        TransferUserRequest transferUserRequest = TransferUserRequest.builder()
-                .senderAccountId(senderId)
-                .receiverAccountId(receiverId)
-                .amount(transferBalance)
-                .build();
-
-        new TransferUserRequester(RequestSpecs.userSpec(userAuthSender), ResponseSpecs.requestReturnOk())
-                .post(transferUserRequest);
-
+        UserSteps.userMakeTransfer(userAuthSender,senderId,receiverId,transferBalance);
+//
         //Балансы после перевода
 
-        DepositUserResponse senderAccountAfter = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthSender),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0);
+        double senderAccountAfter = UserSteps.getUserBalance(userAuthSender);
+        double receiverAccountAfter = UserSteps.getUserBalance(userAuthReceiver);
 
-        DepositUserResponse receiverAccountAfter = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthReceiver),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0);
 
-        softly.assertThat(senderAccountAfter.getBalance())
+        softly.assertThat(senderAccountAfter)
                 .as("Баланс отправителя уменьшился на сумму перевода")
                 .isCloseTo(senderBalanceBefore - transferBalance, within(0.0001));
 
-        softly.assertThat(receiverAccountAfter.getBalance())
+        softly.assertThat(receiverAccountAfter)
                 .as("Баланс получателя увеличился на сумму перевода")
                 .isCloseTo(receiverBalanceBefore + transferBalance, within(0.0001));
 }
@@ -227,25 +113,8 @@ public class TransferTest extends BaseTest {
     @MethodSource("userInvalidTransferData")
     public void userInvalidTransfer(String userAuthSender, String userAuthReceiver, int senderId, int receiverId, double transferBalance) {
         //  Балансы ДО перевода
-        double senderBalanceBefore = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthSender),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0)
-                .getBalance();
-
-        double receiverBalanceBefore = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthReceiver),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0)
-                .getBalance();
+        double senderBalanceBefore = UserSteps.getUserBalance(userAuthSender);
+        double receiverBalanceBefore = UserSteps.getUserBalance(userAuthReceiver);
 
         //Делаем перевод
 
@@ -255,33 +124,18 @@ public class TransferTest extends BaseTest {
                 .amount(transferBalance)
                 .build();
 
-        new TransferUserRequester(RequestSpecs.userSpec(userAuthSender), ResponseSpecs.requestReturnsBadRequestText("Invalid transfer: insufficient funds or invalid accounts"))
+        new CrudRequester(RequestSpecs.userSpec(userAuthSender), Endpoint.TRANSFER, ResponseSpecs.requestReturnsBadRequestText("Invalid transfer: insufficient funds or invalid accounts"))
                 .post(transferUserRequest);
 
         //Балансы после перевода
-        DepositUserResponse senderAccountAfter = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthSender),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0);
+        double senderAccountAfter = UserSteps.getUserBalance(userAuthSender);
+        double receiverAccountAfter = UserSteps.getUserBalance(userAuthReceiver);
 
-        DepositUserResponse receiverAccountAfter = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthReceiver),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0);
-
-        softly.assertThat(senderAccountAfter.getBalance())
+        softly.assertThat(senderAccountAfter)
                 .as("Баланс отправителя не уменьшился на сумму перевода")
                 .isCloseTo(senderBalanceBefore, within(0.0001));
 
-        softly.assertThat(receiverAccountAfter.getBalance())
+        softly.assertThat(receiverAccountAfter)
                 .as("Баланс получателя не увеличился на сумму перевода")
                 .isCloseTo(receiverBalanceBefore, within(0.0001));
 
@@ -290,15 +144,7 @@ public class TransferTest extends BaseTest {
     @Test
     public void userInvalidTransferToUserWithoutAccount() {
         // У отправителя баланс ДО
-        double senderBalanceBefore = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthHeaderFirst),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0)
-                .getBalance();
+        double senderBalanceBefore = UserSteps.getUserBalance(userAuthHeaderFirst);
 
         // Перевод на юзера без аккаунта
         TransferUserRequest transferUserRequest = TransferUserRequest.builder()
@@ -307,21 +153,14 @@ public class TransferTest extends BaseTest {
                 .amount(50)
                 .build();
 
-        new TransferUserRequester(
+        new CrudRequester(
                 RequestSpecs.userSpec(userAuthHeaderFirst),
+                Endpoint.TRANSFER,
                 ResponseSpecs.requestReturnsBadRequestText("Invalid transfer: insufficient funds or invalid accounts")
         ).post(transferUserRequest);
 
         // Баланс отправителя после перевода (не должен измениться)
-        double senderBalanceAfter = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthHeaderFirst),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0)
-                .getBalance();
+        double senderBalanceAfter = UserSteps.getUserBalance(userAuthHeaderFirst);
 
         softly.assertThat(senderBalanceAfter)
                 .as("Баланс отправителя не должен измениться при переводе на пользователя без аккаунта")
@@ -331,15 +170,7 @@ public class TransferTest extends BaseTest {
     @Test
     public void userWithoutAccountCantTransfer() {
         // У юреза с аккаунтом баланс ДО
-        double senderBalanceBefore = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthHeaderFirst),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0)
-                .getBalance();
+        double senderBalanceBefore = UserSteps.getUserBalance(userAuthHeaderFirst);
 
         // Перевод на юзера без аккаунта
         TransferUserRequest transferUserRequest = TransferUserRequest.builder()
@@ -348,21 +179,14 @@ public class TransferTest extends BaseTest {
                 .amount(50)
                 .build();
 
-        new TransferUserRequester(
+        new CrudRequester(
                 RequestSpecs.userSpec(userAuthHeaderWithOutAccount),
+                Endpoint.TRANSFER,
                 ResponseSpecs.requestReturnsForbiddenDeposit()
         ).post(transferUserRequest);
 
         // Баланс пользователя с аккаунтом после перевода (не должен измениться)
-        double senderBalanceAfter = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthHeaderFirst),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0)
-                .getBalance();
+        double senderBalanceAfter = UserSteps.getUserBalance(userAuthHeaderFirst);
 
         softly.assertThat(senderBalanceAfter)
                 .as("Баланс пользователя с аккаунтом не должен измениться при переводе на пользователя без аккаунта")
@@ -380,25 +204,8 @@ public class TransferTest extends BaseTest {
     @MethodSource("userInvalidTokenData")
     public void userInvalidTransferToken(String userAuthSender, int senderId, int receiverId, double transferBalance) {
         //  Балансы ДО перевода
-        double senderBalanceBefore = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthHeaderFirst),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0)
-                .getBalance();
-
-        double receiverBalanceBefore = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthHeaderSecond),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0)
-                .getBalance();
+        double senderBalanceBefore = UserSteps.getUserBalance(userAuthHeaderFirst);
+        double receiverBalanceBefore = UserSteps.getUserBalance(userAuthHeaderSecond);
 
         //Делаем перевод
 
@@ -408,34 +215,17 @@ public class TransferTest extends BaseTest {
                 .amount(transferBalance)
                 .build();
 
-        new TransferUserRequester(RequestSpecs.userSpec(userAuthSender), ResponseSpecs.requestReturnsForbiddenDeposit())
+        new CrudRequester(RequestSpecs.userSpec(userAuthSender),Endpoint.TRANSFER, ResponseSpecs.requestReturnsForbiddenDeposit())
                 .post(transferUserRequest);
 
         //Балансы после перевода
 
-        double senderBalanceAfter = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthHeaderFirst),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0)
-                .getBalance();
+        double senderBalanceAfter = UserSteps.getUserBalance(userAuthHeaderFirst);
+        double receiverBalanceAfter = UserSteps.getUserBalance(userAuthHeaderSecond);
 
         softly.assertThat(senderBalanceAfter)
                 .as("Баланс пользователя с аккаунтом не должен измениться при переводе на пользователя без аккаунта")
                 .isCloseTo(senderBalanceBefore, within(0.0001));
-
-        double receiverBalanceAfter = new GetUserAccountRequester(
-                RequestSpecs.userSpec(userAuthHeaderSecond),
-                ResponseSpecs.requestReturnOk()
-        ).get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class)
-                .get(0)
-                .getBalance();
 
         softly.assertThat(receiverBalanceAfter)
                 .as("Баланс пользователя не должен измениться при переводе на пользователя без аккаунта")

@@ -1,15 +1,17 @@
 package iteration2;
 
-import generators.RandomData;
 import models.*;
+import models.comparison.ModelAssertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import requests.AdminCreateUserRequester;
-import requests.LoginUserRequester;
-import requests.UserProfileRequester;
+import requests.skelethon.Endpoint;
+import requests.skelethon.reauests.CrudRequester;
+import requests.skelethon.reauests.ValidatedCrudRequester;
+import requests.steps.AdminSteps;
+import requests.steps.UserSteps;
 import specs.RequestSpecs;
 import specs.ResponseSpecs;
 
@@ -21,45 +23,13 @@ public class UpdateNameTest extends BaseTest{
 
     @BeforeAll
     public static void usersData(){
-        CreateUserRequest userRequestFirst = CreateUserRequest.builder()
-                .username(RandomData.getUsername())
-                .password(RandomData.getPassword())
-                .role(UserRole.USER.toString())
-                .build();
+            // Первый юзер
+            CreateUserRequest userRequestFirst = AdminSteps.createUser();
+            userAuthHeaderFirst = UserSteps.loginAndGetToken(userRequestFirst);
 
-        new AdminCreateUserRequester(RequestSpecs.adminSpec(),
-                ResponseSpecs.entityWasCreated())
-                .post(userRequestFirst);
-
-        userAuthHeaderFirst = new LoginUserRequester(
-                RequestSpecs.unauthSpec(),
-                ResponseSpecs.requestReturnOk())
-                .post(LoginUserRequest.builder()
-                        .username(userRequestFirst.getUsername())
-                        .password(userRequestFirst.getPassword())
-                        .build())
-                .extract()
-                .header("Authorization");
-
-        // Второй юзер
-        CreateUserRequest userRequestSecond = CreateUserRequest.builder()
-                .username(RandomData.getUsername())
-                .password(RandomData.getPassword())
-                .role(UserRole.USER.toString())
-                .build();
-        new AdminCreateUserRequester(RequestSpecs.adminSpec(),
-                ResponseSpecs.entityWasCreated())
-                .post(userRequestSecond);
-
-        userAuthHeaderSecond = new LoginUserRequester(
-                RequestSpecs.unauthSpec(),
-                ResponseSpecs.requestReturnOk())
-                .post(LoginUserRequest.builder()
-                        .username(userRequestSecond.getUsername())
-                        .password(userRequestSecond.getPassword())
-                        .build())
-                .extract()
-                .header("Authorization");
+            // Второй юзер
+            CreateUserRequest userRequestSecond = AdminSteps.createUser();
+            userAuthHeaderSecond = UserSteps.loginAndGetToken(userRequestSecond);
     }
 
     public static Stream<Arguments> userValidNameAccountData() {
@@ -83,15 +53,19 @@ public class UpdateNameTest extends BaseTest{
                 .name(updateName)
                 .build();
 
-        UpdateProfileNameResponse response = new UserProfileRequester(RequestSpecs.userSpec(userAuth), ResponseSpecs.requestReturnOk())
+        UpdateProfileNameResponse updateProfileNameResponse = new CrudRequester(RequestSpecs.userSpec(userAuth), Endpoint.UPDATE_PROFILE, ResponseSpecs.requestReturnOk())
                 .put(updateProfileNameRequest)
-               .extract()
+                .extract()
                 .as(UpdateProfileNameResponse.class);
 
-        // Проверяем, что имя обновилось
-        softly.assertThat(response.getCustomer().getName())
-                .as("Имя в профиле должно обновиться")
-                .isEqualTo(updateName);
+        GetUserProfileResponse getUserProfile = new ValidatedCrudRequester<GetUserProfileResponse>(RequestSpecs.userSpec(userAuth), Endpoint.GET_USER_PROFILE, ResponseSpecs.requestReturnOk())
+                .get();
+
+        // Проверяем, что имя обновилось ("Имя в профиле должно обновиться")
+        ModelAssertions.assertThatModels(updateProfileNameRequest,updateProfileNameResponse.getCustomer()).match();
+
+        // Проверка состояния
+        ModelAssertions.assertThatModels(updateProfileNameResponse.getCustomer(),getUserProfile).match();
     }
 
 
@@ -102,20 +76,27 @@ public class UpdateNameTest extends BaseTest{
                 .name("Мурзик")
                 .build();
 
-        new UserProfileRequester(RequestSpecs.adminSpec(), ResponseSpecs.requestReturnsForbiddenDeposit())
+        // Состояние профиля до попытки поменять имя
+
+        GetUserProfileResponse getUserProfileBefore = new ValidatedCrudRequester<GetUserProfileResponse>(RequestSpecs.userSpec(userAuthHeaderFirst), Endpoint.GET_USER_PROFILE,ResponseSpecs.requestReturnOk())
+                .get();
+
+        new CrudRequester(RequestSpecs.adminSpec(), Endpoint.UPDATE_PROFILE, ResponseSpecs.requestReturnsForbiddenDeposit())
                 .put(updateProfileNameRequest);
 
-        CreateUserResponse response = new UserProfileRequester(RequestSpecs.userSpec(userAuthHeaderFirst), ResponseSpecs.requestReturnOk())
-                .get(null)
+        CreateUserResponse response = new CrudRequester(RequestSpecs.userSpec(userAuthHeaderFirst), Endpoint.GET_USER_PROFILE, ResponseSpecs.requestReturnOk())
+                .get()
                 .extract()
                 .as(CreateUserResponse.class);
 
 
+        //Состояние профиля после попытки поменять имя
+        GetUserProfileResponse getUserProfileAfter = new ValidatedCrudRequester<GetUserProfileResponse>(RequestSpecs.userSpec(userAuthHeaderFirst), Endpoint.GET_USER_PROFILE,ResponseSpecs.requestReturnOk())
+                .get();
 
         // Проверяем, что имя не обновилось
-        softly.assertThat(response.getName())
-                .as("Имя в профиле не должно обновиться")
-                .isNotEqualTo("Мурзик");
+        ModelAssertions.assertThatModels(getUserProfileBefore, getUserProfileAfter).match();
+
 
     }
 }

@@ -1,11 +1,15 @@
 package iteration2;
 
-import generators.RandomData;
+import models.CreateAccountResponse;
 import models.CreateUserRequest;
-import models.UserRole;
+import models.DepositUserResponse;
+import models.GetUserAccountResponse;
+import models.comparison.ModelAssertions;
 import org.junit.jupiter.api.Test;
-import requests.AdminCreateUserRequester;
-import requests.CreateAccountRequester;
+import requests.skelethon.Endpoint;
+import requests.skelethon.reauests.CrudRequester;
+import requests.skelethon.reauests.ValidatedCrudRequester;
+import requests.steps.AdminSteps;
 import specs.RequestSpecs;
 import specs.ResponseSpecs;
 
@@ -13,32 +17,28 @@ public class CreateAccountTest extends BaseTest{
 
     @Test
     public void userCanGenerateAuthTokenTest() {
-        CreateUserRequest userRequest = CreateUserRequest.builder()
-                .username(RandomData.getUsername())
-                .password(RandomData.getPassword())
-                .role(UserRole.USER.toString())
-                .build();
+
+        CreateUserRequest userRequest = AdminSteps.createUser();
 
 
-        new AdminCreateUserRequester(
-                RequestSpecs.adminSpec(),
-                ResponseSpecs.entityWasCreated())
-                .post(userRequest);
-
-        new CreateAccountRequester(RequestSpecs.authAsUser(userRequest.getUsername(), userRequest.getPassword()),
+        CreateAccountResponse createAccountResponse = new ValidatedCrudRequester<CreateAccountResponse>(RequestSpecs.authAsUser(userRequest.getUsername(), userRequest.getPassword()),
+        Endpoint.ACCOUNTS,
         ResponseSpecs.entityWasCreated())
-                .post(null);
+                .post(null)
+        ;
 
+        GetUserAccountResponse getUserAccountResponse = new CrudRequester(RequestSpecs.authAsUser(userRequest.getUsername(), userRequest.getPassword()),
+                Endpoint.GET_USER_ACCOUNT,
+                ResponseSpecs.requestReturnOk())
+                .get()
+                .extract()
+                .jsonPath()
+                .getList("", GetUserAccountResponse.class)
+                .get(0);
 
-        // получение списка аккаунтов, проверка что аккаунт создан
-//        given()
-//                .header("Authorization", userAuthHeader)
-//                .contentType(ContentType.JSON)
-//                .accept(ContentType.JSON)
-//                .get("http://localhost:4111/api/v1/customer/profile")
-//                .then()
-//                .assertThat()
-//                .statusCode(HttpStatus.SC_OK)
-//                .body("accounts", Matchers.notNullValue());
+        //проверка что аккаунт создан
+
+        ModelAssertions.assertThatModels(createAccountResponse,getUserAccountResponse).match();
+
    }
 }

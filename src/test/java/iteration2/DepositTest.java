@@ -1,12 +1,19 @@
 package iteration2;
 
-import generators.RandomData;
-import models.*;
+import models.CreateUserRequest;
+import models.DepositUserRequest;
+import models.DepositUserResponse;
+import models.GetUserAccountResponse;
+import models.comparison.ModelAssertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import requests.*;
+import requests.skelethon.Endpoint;
+import requests.skelethon.reauests.CrudRequester;
+import requests.skelethon.reauests.ValidatedCrudRequester;
+import requests.steps.AdminSteps;
+import requests.steps.UserSteps;
 import specs.RequestSpecs;
 import specs.ResponseSpecs;
 
@@ -25,85 +32,20 @@ public class DepositTest extends BaseTest {
     @BeforeAll
     public static void setupUsersData() {
         // Первый юзер
-        CreateUserRequest userRequestFirst = CreateUserRequest.builder()
-                .username(RandomData.getUsername())
-                .password(RandomData.getPassword())
-                .role(UserRole.USER.toString())
-                .build();
-        new AdminCreateUserRequester(RequestSpecs.adminSpec(),
-                ResponseSpecs.entityWasCreated())
-                .post(userRequestFirst);
-
-        userAuthHeaderFirst = new LoginUserRequester(
-                RequestSpecs.unauthSpec(),
-                ResponseSpecs.requestReturnOk())
-                .post(LoginUserRequest.builder()
-                        .username(userRequestFirst.getUsername())
-                        .password(userRequestFirst.getPassword())
-                        .build())
-                .extract()
-                .header("Authorization");
-
-        userIdFirst = new CreateAccountRequester(
-                RequestSpecs.userSpec(userAuthHeaderFirst),
-                ResponseSpecs.entityWasCreated())
-                .post(null)
-                .extract()
-                .path("id");
+        CreateUserRequest userRequestFirst = AdminSteps.createUser();
+        userAuthHeaderFirst = UserSteps.loginAndGetToken(userRequestFirst);
+        userIdFirst = UserSteps.createAccount(userAuthHeaderFirst);
 
         // Второй юзер
-        CreateUserRequest userRequestSecond = CreateUserRequest.builder()
-                .username(RandomData.getUsername())
-                .password(RandomData.getPassword())
-                .role(UserRole.USER.toString())
-                .build();
-        new AdminCreateUserRequester(RequestSpecs.adminSpec(),
-                ResponseSpecs.entityWasCreated())
-                .post(userRequestSecond);
+        CreateUserRequest userRequestSecond = AdminSteps.createUser();
+        userAuthHeaderSecond = UserSteps.loginAndGetToken(userRequestSecond);
+        userIdSecond = UserSteps.createAccount(userAuthHeaderSecond);
 
-        userAuthHeaderSecond = new LoginUserRequester(
-                RequestSpecs.unauthSpec(),
-                ResponseSpecs.requestReturnOk())
-                .post(LoginUserRequest.builder()
-                        .username(userRequestSecond.getUsername())
-                        .password(userRequestSecond.getPassword())
-                        .build())
-                .extract()
-                .header("Authorization");
-
-        userIdSecond = new CreateAccountRequester(
-                RequestSpecs.userSpec(userAuthHeaderSecond),
-                ResponseSpecs.entityWasCreated())
-                .post(null)
-                .extract()
-                .path("id");
 
         // Третий юзер
-        CreateUserRequest userRequestWithOutAccount = CreateUserRequest.builder()
-                .username(RandomData.getUsername())
-                .password(RandomData.getPassword())
-                .role(UserRole.USER.toString())
-                .build();
-        new AdminCreateUserRequester(RequestSpecs.adminSpec(),
-                ResponseSpecs.entityWasCreated())
-                .post(userRequestWithOutAccount);
-
-        userAuthHeaderWithOutAccount = new LoginUserRequester(
-                RequestSpecs.unauthSpec(),
-                ResponseSpecs.requestReturnOk())
-                .post(LoginUserRequest.builder()
-                        .username(userRequestWithOutAccount.getUsername())
-                        .password(userRequestWithOutAccount.getPassword())
-                        .build())
-                .extract()
-                .header("Authorization");
-
-        userIdWithOutAccount = new UserProfileRequester(
-                RequestSpecs.userSpec(userAuthHeaderWithOutAccount),
-                ResponseSpecs.requestReturnOk())
-                .get(null)
-                .extract()
-                .path("id");
+        CreateUserRequest userRequestWithOutAccount = AdminSteps.createUser();
+        userAuthHeaderWithOutAccount = UserSteps.loginAndGetToken(userRequestWithOutAccount);
+        userIdWithOutAccount = UserSteps.getUserProfile(userAuthHeaderWithOutAccount);
     }
 
 
@@ -120,26 +62,18 @@ public class DepositTest extends BaseTest {
     @MethodSource("userValidDeposit")
     public void userCanDepositMoney(double depositBalance) {
 
-        DepositUserRequest depositRequest = DepositUserRequest.builder()
-                .id(userIdFirst)
-                .balance(depositBalance)
-                .build();
+        DepositUserResponse depositUserResponse = UserSteps.deposit(userAuthHeaderFirst, userIdFirst, depositBalance);
 
-       DepositUserResponse depositUserResponse = new DepositRequester(RequestSpecs.userSpec(userAuthHeaderFirst), ResponseSpecs.requestReturnOk())
-                .post(depositRequest)
-                .extract()
-                .as(DepositUserResponse.class);
-
-
-       List<DepositUserResponse> accounts = new GetUserAccountRequester(RequestSpecs.userSpec(userAuthHeaderFirst), ResponseSpecs.requestReturnOk())
-                .get(null)
+        GetUserAccountResponse getUserAccountResponse = new CrudRequester(RequestSpecs.userSpec(userAuthHeaderFirst), Endpoint.GET_USER_ACCOUNT, ResponseSpecs.requestReturnOk())
+                .get()
                .extract()
                 .jsonPath()
-                .getList("", DepositUserResponse.class);
+                .getList("", GetUserAccountResponse.class)
+               .get(0);
 
-        DepositUserResponse getUserAccountResponse = accounts.get(0);
+        //Проверка состояния
+        ModelAssertions.assertThatModels(depositUserResponse,getUserAccountResponse).match();
 
-        softly.assertThat(depositUserResponse.getBalance()).isEqualTo(getUserAccountResponse.getBalance());
     }
 
 
@@ -159,9 +93,16 @@ public class DepositTest extends BaseTest {
                 .balance(balance)
                 .build();
 
-        new DepositRequester(RequestSpecs.userSpec(userAuthHeaderFirst), ResponseSpecs.requestReturnsBadRequestText(errorValue))
-                .post(depositRequest);
+        // Состояние аккаунта до депозита
+        GetUserAccountResponse getUserBalanceBefore = UserSteps.getUserAccount(userAuthHeaderFirst);
 
+        new CrudRequester(RequestSpecs.userSpec(userAuthHeaderFirst), Endpoint.DEPOSIT, ResponseSpecs.requestReturnsBadRequestText(errorValue))
+                .post(depositRequest);
+        // Сотояние аккаунта после попытки сделать депозит с невалидными значениями
+        GetUserAccountResponse getUserBalanceAfter = UserSteps.getUserAccount(userAuthHeaderFirst);
+
+        // Проверка что баланс не поменялся
+        ModelAssertions.assertThatModels(getUserBalanceBefore,getUserBalanceAfter).match();
     }
 
 
@@ -180,21 +121,19 @@ public class DepositTest extends BaseTest {
                 .balance(50)
                 .build();
 
+        // Состояние аккаунта до депозита
+        GetUserAccountResponse getUserBalanceBefore = UserSteps.getUserAccount(userAuthHeaderFirst);
 
-        new DepositRequester(RequestSpecs.userSpec(userAuth), ResponseSpecs.requestReturnsForbiddenDeposit())
+        new CrudRequester(RequestSpecs.userSpec(userAuth), Endpoint.DEPOSIT, ResponseSpecs.requestReturnsForbiddenDeposit())
                 .post(depositRequest);
 
+        // Сотояние аккаунта после попытки сделать депозит с невалидными значениями
+        GetUserAccountResponse getUserBalanceAfter = UserSteps.getUserAccount(userAuthHeaderFirst);
 
-        List<DepositUserResponse> accounts = new GetUserAccountRequester(RequestSpecs.userSpec(userAuthHeaderFirst), ResponseSpecs.requestReturnOk())
-                .get(null)
-                .extract()
-                .jsonPath()
-                .getList("", DepositUserResponse.class);
-
-        DepositUserResponse getUserAccountResponse = accounts.get(0);
-
-        softly.assertThat(depositRequest.getBalance()).isNotEqualTo(getUserAccountResponse.getBalance());
+        // Проверка что баланс не поменялся
+        ModelAssertions.assertThatModels(getUserBalanceBefore,getUserBalanceAfter).match();
 
 
-    }}
+    }
+}
 
