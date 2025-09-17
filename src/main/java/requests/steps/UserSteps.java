@@ -32,6 +32,16 @@ public class UserSteps {
                 .path("id");
     }
 
+    public static String createAccountAndGetNumber(String authHeader) {
+        return new CrudRequester(
+                RequestSpecs.userSpec(authHeader),
+                Endpoint.ACCOUNTS,
+                ResponseSpecs.entityWasCreated())
+                .post(null)
+                .extract()
+                .path("accountNumber");
+    }
+
     public static int getUserProfile(String authHeader) {
 
        return new CrudRequester(

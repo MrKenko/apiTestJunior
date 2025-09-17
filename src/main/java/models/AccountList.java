@@ -10,8 +10,8 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountList {
-    private int id;
+public class AccountList extends BaseModel {
+    private long id;
     private String accountNumber;
     private double balance;
     private List<TransactionList> transactions;

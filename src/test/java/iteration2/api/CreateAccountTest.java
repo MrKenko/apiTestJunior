@@ -1,8 +1,7 @@
-package iteration2;
+package iteration2.api;
 
 import models.CreateAccountResponse;
 import models.CreateUserRequest;
-import models.DepositUserResponse;
 import models.GetUserAccountResponse;
 import models.comparison.ModelAssertions;
 import org.junit.jupiter.api.Test;
