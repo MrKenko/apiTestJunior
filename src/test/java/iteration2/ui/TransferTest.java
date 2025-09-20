@@ -1,96 +1,66 @@
 package iteration2.ui;
 
+import api.models.CreateUserRequest;
+import api.requests.steps.AdminSteps;
+import api.requests.steps.UserSteps;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selectors;
-import com.codeborne.selenide.Selenide;
-import iteration2.api.BaseTest;
-import models.CreateUserRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.openqa.selenium.Alert;
-import requests.steps.AdminSteps;
-import requests.steps.UserSteps;
+import ui.pages.BankAlert;
+import ui.pages.TransferPage;
+import ui.pages.UserDashboard;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.stream.Stream;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 import static org.assertj.core.api.AssertionsForClassTypes.within;
 
-public class TransferTest extends BaseTest {
+public class TransferTest extends BaseUiTest {
     static String accountNumberUserFirst;
     static String accountNumberUserSecond;
     static double startAmount = 50;
     static double transferAmount = 10;
     static String userAuthHeaderFirst;
     static String userAuthHeaderSecond;
-    static String alertTextEmptyField = "❌ Please fill all fields and confirm.";
-    static String alertTextInvalidAmount = "❌ No user found with this account number.";
+    static String alertTextEmptyField = BankAlert.FILL_ALL_FIELDS.getMessage();
+    static String alertTextInvalidAmount = BankAlert.NO_USER_FOUND.getMessage();
 
     @BeforeAll
-    public static void setupSelenoid() {
-        Configuration.remote = "http://192.168.1.9:4444/wd/hub";
-        Configuration.baseUrl = "http://172.23.96.1:3000";
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1920x1080";
-
-        Configuration.browserCapabilities.setCapability("selenoid:options",
-                Map.of("enableVNC", true, "enableLog", true)
-        );
-    }
-
-    @Test
-    public void userCanMakeTransfer() {
-        //Пред шаги
+    public static void setupUserName() {
         CreateUserRequest userRequestFirst = AdminSteps.createUser();
+
         userAuthHeaderFirst = UserSteps.loginAndGetToken(userRequestFirst);
-        String accountNumberUserFirst = UserSteps.createAccountAndGetNumber(userAuthHeaderFirst);
-        int userIdFirst = UserSteps.getUserProfile(userAuthHeaderFirst);
+        accountNumberUserFirst = UserSteps.createAccountAndGetNumber(userAuthHeaderFirst);
+        int userIdFirst = UserSteps.getUserAccount(userAuthHeaderFirst).getId();
         UserSteps.deposit(userAuthHeaderFirst, userIdFirst, startAmount);
 
         CreateUserRequest userRequestSecond = AdminSteps.createUser();
         userAuthHeaderSecond = UserSteps.loginAndGetToken(userRequestSecond);
-        String accountNumberUserSecond = UserSteps.createAccountAndGetNumber(userAuthHeaderSecond);
+        accountNumberUserSecond = UserSteps.createAccountAndGetNumber(userAuthHeaderSecond);
+        authAsUser(userRequestFirst);
+    }
+
+
+    @Test
+    public void userCanMakeTransfer() {
 
         //  Балансы ДО перевода
         double senderBalanceBefore = UserSteps.getUserBalance(userAuthHeaderFirst);
         double receiverBalanceBefore = UserSteps.getUserBalance(userAuthHeaderSecond);
 
-        Selenide.open("/");
-
-        executeJavaScript("localStorage.setItem('authToken', arguments[0])", userAuthHeaderFirst);
-
-        Selenide.open("/dashboard");
-        // ШАГИ теста
-        $(Selectors.byText("\uD83D\uDD04 Make a Transfer")).click();
-        $(Selectors.byText("\uD83D\uDD04 Make a Transfer")).shouldBe(Condition.visible);
-        $(Selectors.byText("-- Choose an account --")).click();
-        $(Selectors.byText(accountNumberUserFirst)).shouldBe(Condition.visible);
-        $(Selectors.byText(accountNumberUserFirst)).click();
-        $$(".form-group input").get(0).setValue(accountNumberUserFirst); // Recipient Name
-        $$(".form-group input").get(1).setValue(accountNumberUserSecond);      // Recipient Account Number
-        $$(".form-group input").get(2).setValue(String.valueOf(transferAmount));
-
-        // Подтверждаем чекбокс
-        $(Selectors.byAttribute("id", "confirmCheck")).click();
-
-        // Жмём кнопку отправки
-        $(Selectors.byText("🚀 Send Transfer")).click();
-        Alert alert = switchTo().alert();
-
-        //Проверка алерта
-        softly.assertThat(alert.getText()).isEqualTo("✅ Successfully transferred $" + transferAmount + " to account " + accountNumberUserSecond + "!");
-        alert.accept();
+        new UserDashboard().open().makeATransfer().getMakeATransfer().shouldBe(Condition.visible).shouldHave(Condition.text("\uD83D\uDD04 Make a Transfer"));
+        new TransferPage().open().selectAccount(accountNumberUserFirst).transfer(accountNumberUserFirst, accountNumberUserSecond, transferAmount)
+                .checkAlertMessageAndAccept(BankAlert.SUCCESS_TRANSFER.format(transferAmount, accountNumberUserSecond));
 
         //Получение значения баланса и UI
         refresh();
-        $(Selectors.byText("-- Choose an account --")).click();
-        $(Selectors.byText(accountNumberUserFirst)).shouldBe(Condition.visible);
+        new TransferPage().open().selectAccount(accountNumberUserFirst);
         double resultBalance = getBalanceAsDouble(accountNumberUserFirst);
 
         //Балансы после перевода
@@ -140,51 +110,16 @@ public class TransferTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("invalidDepositData")
     public void userCanNotTransfer(String receiverNumber, double amount, String textAlert) {
-        //Пред шаги
-        CreateUserRequest userRequestFirst = AdminSteps.createUser();
-        userAuthHeaderFirst = UserSteps.loginAndGetToken(userRequestFirst);
-        String accountNumberUserFirst = UserSteps.createAccountAndGetNumber(userAuthHeaderFirst);
-        int userIdFirst = UserSteps.getUserProfile(userAuthHeaderFirst);
-        UserSteps.deposit(userAuthHeaderFirst, userIdFirst, startAmount);
-
-        CreateUserRequest userRequestSecond = AdminSteps.createUser();
-        userAuthHeaderSecond = UserSteps.loginAndGetToken(userRequestSecond);
-        String accountNumberUserSecond = UserSteps.createAccountAndGetNumber(userAuthHeaderSecond);
 
         //  Балансы ДО перевода
         double senderBalanceBefore = UserSteps.getUserBalance(userAuthHeaderFirst);
         double receiverBalanceBefore = UserSteps.getUserBalance(userAuthHeaderSecond);
 
-        Selenide.open("/");
-
-        executeJavaScript("localStorage.setItem('authToken', arguments[0])", userAuthHeaderFirst);
-
-        Selenide.open("/dashboard");
-        // ШАГИ теста
-        $(Selectors.byText("\uD83D\uDD04 Make a Transfer")).click();
-        $(Selectors.byText("\uD83D\uDD04 Make a Transfer")).shouldBe(Condition.visible);
-        $(Selectors.byText("-- Choose an account --")).click();
-        $(Selectors.byText(accountNumberUserFirst)).shouldBe(Condition.visible);
-        $(Selectors.byText(accountNumberUserFirst)).click();
-        $$(".form-group input").get(0).setValue(accountNumberUserFirst); // Recipient Name
-        $$(".form-group input").get(1).setValue(receiverNumber);      // Recipient Account Number
-        $$(".form-group input").get(2).setValue(String.valueOf(amount));
-        // Подтверждаем чекбокс
-        $(Selectors.byAttribute("id", "confirmCheck")).click();
-
-        // Жмём кнопку отправки
-        $(Selectors.byText("🚀 Send Transfer")).click();
-
-        Alert alert = switchTo().alert();
-
-        //Проверка алерта
-        softly.assertThat(alert.getText()).isEqualTo(textAlert);
-        alert.accept();
+        new TransferPage().open().selectAccount(accountNumberUserFirst).transfer(accountNumberUserFirst, receiverNumber, amount).checkAlertMessageAndAccept(textAlert);
 
         //Получение значения баланса и UI
         refresh();
-        $(Selectors.byText("-- Choose an account --")).click();
-        $(Selectors.byText(accountNumberUserFirst)).shouldBe(Condition.visible);
+        new TransferPage().open().selectAccount(accountNumberUserFirst);
         double resultBalance = getBalanceAsDouble(accountNumberUserFirst);
 
         //Проверка что баланс поменялся на UI
