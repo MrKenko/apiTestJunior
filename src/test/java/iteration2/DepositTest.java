@@ -1,293 +1,139 @@
 package iteration2;
 
-import io.restassured.RestAssured;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
-import io.restassured.http.ContentType;
-import org.apache.http.HttpStatus;
-import org.hamcrest.Matchers;
+import models.CreateUserRequest;
+import models.DepositUserRequest;
+import models.DepositUserResponse;
+import models.GetUserAccountResponse;
+import models.comparison.ModelAssertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import requests.skelethon.Endpoint;
+import requests.skelethon.reauests.CrudRequester;
+import requests.skelethon.reauests.ValidatedCrudRequester;
+import requests.steps.AdminSteps;
+import requests.steps.UserSteps;
+import specs.RequestSpecs;
+import specs.ResponseSpecs;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Stream;
 
-import static io.restassured.RestAssured.given;
+public class DepositTest extends BaseTest {
 
-public class DepositTest {
     static String userAuthHeaderFirst;
     static String userAuthHeaderSecond;
     static String userAuthHeaderWithOutAccount;
-    static String userNameFirst;
-    static String userNameSecond;
-    static String userNameWithOutAccount;
     static int userIdFirst;
     static int userIdSecond;
     static int userIdWithOutAccount;
 
     @BeforeAll
-    public static void setupRestAssured() {
-        RestAssured.filters(
-                List.of(new RequestLoggingFilter(),
-                        new ResponseLoggingFilter())
-        );
-    }
+    public static void setupUsersData() {
+        // Первый юзер
+        CreateUserRequest userRequestFirst = AdminSteps.createUser();
+        userAuthHeaderFirst = UserSteps.loginAndGetToken(userRequestFirst);
+        userIdFirst = UserSteps.createAccount(userAuthHeaderFirst);
 
-    @BeforeAll
-    public static void setupUserName() {
-        userNameFirst = "R11w1aq1q12171";
-        userNameSecond = "R22w1aq1q12171";
-        userNameWithOutAccount = "R33w1aq1q12171";
-        //создание пользователя
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", "Basic YWRtaW46YWRtaW4=")
-                .body("""
-                        {
-                          "username": "%s",
-                          "password": "Roma1123!",
-                          "role": "USER"
-                        }
-                        """.formatted(userNameFirst))
-                .post("http://localhost:4111/api/v1/admin/users")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_CREATED);
-        //получение токена
-        userAuthHeaderFirst = given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body("""
-                        
-                        {
-                              "username": "%s",
-                              "password": "Roma1123!"
-                        }
-                        """.formatted(userNameFirst))
-                .post("http://localhost:4111/api/v1/auth/login")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .extract()
-                .header("Authorization");
-
-        userIdFirst = given()
-                .header("Authorization", userAuthHeaderFirst)
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .post("http://localhost:4111/api/v1/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_CREATED)
-                .extract()
-                .path("id");
+        // Второй юзер
+        CreateUserRequest userRequestSecond = AdminSteps.createUser();
+        userAuthHeaderSecond = UserSteps.loginAndGetToken(userRequestSecond);
+        userIdSecond = UserSteps.createAccount(userAuthHeaderSecond);
 
 
-        //Создание второго пользователя с аккаунтом-счётом
-
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", "Basic YWRtaW46YWRtaW4=")
-                .body("""
-                        {
-                          "username": "%s",
-                          "password": "Roma1123!",
-                          "role": "USER"
-                        }
-                        """.formatted(userNameSecond))
-                .post("http://localhost:4111/api/v1/admin/users")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_CREATED);
-        //получение токена
-        userAuthHeaderSecond = given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body("""
-                        
-                        {
-                              "username": "%s",
-                              "password": "Roma1123!"
-                        }
-                        """.formatted(userNameSecond))
-                .post("http://localhost:4111/api/v1/auth/login")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .extract()
-                .header("Authorization");
-
-        userIdSecond = given()
-                .header("Authorization", userAuthHeaderSecond)
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .post("http://localhost:4111/api/v1/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_CREATED)
-                .extract()
-                .path("id");
-
-
-        // Создание пользователя без акаунт-счета
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", "Basic YWRtaW46YWRtaW4=")
-                .body("""
-                        {
-                          "username": "%s",
-                          "password": "Roma1123!",
-                          "role": "USER"
-                        }
-                        """.formatted(userNameWithOutAccount))
-                .post("http://localhost:4111/api/v1/admin/users")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_CREATED);
-        //получение токена
-        userAuthHeaderWithOutAccount = given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .body("""
-                        
-                        {
-                              "username": "%s",
-                              "password": "Roma1123!"
-                        }
-                        """.formatted(userNameWithOutAccount))
-                .post("http://localhost:4111/api/v1/auth/login")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .extract()
-                .header("Authorization");
-
-        userIdWithOutAccount = given()
-                .header("Authorization", userAuthHeaderWithOutAccount)
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .post("http://localhost:4111/api/v1/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_CREATED)
-                .extract()
-                .path("id");
+        // Третий юзер
+        CreateUserRequest userRequestWithOutAccount = AdminSteps.createUser();
+        userAuthHeaderWithOutAccount = UserSteps.loginAndGetToken(userRequestWithOutAccount);
+        userIdWithOutAccount = UserSteps.getUserProfile(userAuthHeaderWithOutAccount);
     }
 
 
 
 
-public static Stream<Arguments> userValidDeposit(){
+    public static Stream<Arguments> userValidDeposit() {
         return Stream.of(
-                Arguments.of(50.0, 50.0f),
-                Arguments.of(0.01, 50.01f)
+                Arguments.of(50.0),
+                Arguments.of(0.01)
         );
-}
+    }
+
     @ParameterizedTest
     @MethodSource("userValidDeposit")
-    public void userCanDepositMoney(double depositBalance, float resultBalance ) {
-        //депозит
-        String body = String.format(Locale.ENGLISH, """
-    {
-      "id": %d,
-      "balance": %.2f
-    }
-    """, userIdFirst, depositBalance);
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthHeaderFirst)
-                .body(body)
-                .post("http://localhost:4111/api/v1/accounts/deposit")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("balance", Matchers.equalTo(resultBalance));
+    public void userCanDepositMoney(double depositBalance) {
 
-        //Проверка, что баланс обновился
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthHeaderFirst)
-                .get("http://localhost:4111/api/v1/customer/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("balance[0]", Matchers.equalTo(resultBalance));
+        DepositUserResponse depositUserResponse = UserSteps.deposit(userAuthHeaderFirst, userIdFirst, depositBalance);
+
+        GetUserAccountResponse getUserAccountResponse = new CrudRequester(RequestSpecs.userSpec(userAuthHeaderFirst), Endpoint.GET_USER_ACCOUNT, ResponseSpecs.requestReturnOk())
+                .get()
+               .extract()
+                .jsonPath()
+                .getList("", GetUserAccountResponse.class)
+               .get(0);
+
+        //Проверка состояния
+        ModelAssertions.assertThatModels(depositUserResponse,getUserAccountResponse).match();
+
     }
 
-    public static Stream<Number> invalidDepositData() {
-        return Stream.of(0, -100);
+
+    public static Stream<Arguments> invalidDepositData() {
+        return Stream.of(
+                Arguments.of(0, "Invalid account or amount"),
+                Arguments.of(-100, "Invalid account or amount")
+                );
     }
 
     @ParameterizedTest
     @MethodSource("invalidDepositData")
-    public void userCanNotDeposit(int balance) {
-        //депозит
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthHeaderFirst)
-                .body("""
-                        {
-                        "id": %d,
-                        "balance": %d
-                        }
-                        """.formatted(userIdFirst, balance))
-                .post("http://localhost:4111/api/v1/accounts/deposit")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_BAD_REQUEST);
+    public void userCanNotDeposit(int balance, String errorValue) {
 
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthHeaderFirst)
-                .get("http://localhost:4111/api/v1/customer/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("balance[0]", Matchers.equalTo(0.0f));
+        DepositUserRequest depositRequest = DepositUserRequest.builder()
+                .id(userIdFirst)
+                .balance(balance)
+                .build();
+
+        // Состояние аккаунта до депозита
+        GetUserAccountResponse getUserBalanceBefore = UserSteps.getUserAccount(userAuthHeaderFirst);
+
+        new CrudRequester(RequestSpecs.userSpec(userAuthHeaderFirst), Endpoint.DEPOSIT, ResponseSpecs.requestReturnsBadRequestText(errorValue))
+                .post(depositRequest);
+        // Сотояние аккаунта после попытки сделать депозит с невалидными значениями
+        GetUserAccountResponse getUserBalanceAfter = UserSteps.getUserAccount(userAuthHeaderFirst);
+
+        // Проверка что баланс не поменялся
+        ModelAssertions.assertThatModels(getUserBalanceBefore,getUserBalanceAfter).match();
     }
+
+
     public static Stream<Arguments> invalidTokenData() {
-        return Stream.of(Arguments.of("Basic YWRtaW46YWRtaW4="), //токен Админа
-                Arguments.of(userAuthHeaderSecond),                      //токен другого пользователя
-               Arguments.of(userAuthHeaderWithOutAccount)               //токен пользователя без аккаунт-счета
+        return Stream.of(Arguments.of("Basic YWRtaW46YWRtaW4=", userIdFirst), //токен Админа
+                Arguments.of(userAuthHeaderSecond, userIdFirst),                      //токен другого пользователя
+               Arguments.of(userAuthHeaderWithOutAccount, userIdFirst)               //токен пользователя без аккаунт-счета
                 );
     }
     @ParameterizedTest
     @MethodSource("invalidTokenData")
-    public void userInvalidToken(String userAuth){
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuth)
-                .body("""
-                        {
-                        "id": %d,
-                        "balance": 50
-                        }
-                        """.formatted(userIdFirst))
-                .post("http://localhost:4111/api/v1/accounts/deposit")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_FORBIDDEN);
+    public void userInvalidToken(String userAuth, int userId) {
 
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", userAuthHeaderFirst)
-                .get("http://localhost:4111/api/v1/customer/accounts")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .body("balance[0]", Matchers.equalTo(0.0f));
+        DepositUserRequest depositRequest = DepositUserRequest.builder()
+                .id(userId)
+                .balance(50)
+                .build();
+
+        // Состояние аккаунта до депозита
+        GetUserAccountResponse getUserBalanceBefore = UserSteps.getUserAccount(userAuthHeaderFirst);
+
+        new CrudRequester(RequestSpecs.userSpec(userAuth), Endpoint.DEPOSIT, ResponseSpecs.requestReturnsForbiddenDeposit())
+                .post(depositRequest);
+
+        // Сотояние аккаунта после попытки сделать депозит с невалидными значениями
+        GetUserAccountResponse getUserBalanceAfter = UserSteps.getUserAccount(userAuthHeaderFirst);
+
+        // Проверка что баланс не поменялся
+        ModelAssertions.assertThatModels(getUserBalanceBefore,getUserBalanceAfter).match();
+
+
     }
-
 }
+

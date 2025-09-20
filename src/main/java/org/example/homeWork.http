@@ -1,0 +1,299 @@
+### Get auth token (получение токена юзера)
+### admin tiken: Authorization: Basic YWRtaW46YWRtaW4=
+POST http://localhost:4111/api/v1/auth/login
+content-Type: application/json
+
+{
+  "username": "kate19982",
+  "password": "Kate19981!"
+}
+
+### Create user by admin (создание юзера)
+POST http://localhost:4111/api/v1/admin/users
+content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "Rom1a123999",
+  "password": "Kate19981!",
+  "role": "USER"
+}
+
+### Create an accaunt (создание аккаунта - счета юзера)
+POST http://localhost:4111/api/v1/accounts
+content-Type: application/json
+Authorization: Basic Um9tYTEyMzk5OTpLYXRlMTk5ODEh
+
+
+### Deposite money for User1 (целое число) 200 ok
+POST http://localhost:4111/api/v1/accounts/deposit
+content-Type: application/json
+Authorization: Basic a3NhdGUxOTk4MjpLYXRlMTk5ODEh
+
+{
+  "id": 27,
+  "balance": 50,00
+}
+
+### Deposite money for User1 (1 копейка - проверка минимума) 200 ok
+POST http://localhost:4111/api/v1/accounts/deposit
+content-Type: application/json
+Authorization: Basic a2F0ZTE5OTgyOkthdGUxOTk4MSE=
+
+{
+  "id": 1,
+  "balance": 0.01
+}
+
+### Deposite money for User1 (отрицательное число) 400
+POST http://localhost:4111/api/v1/accounts/deposit
+content-Type: application/json
+Authorization: Basic a2F0ZTE5OTgyOkthdGUxOTk4MSE=
+
+{
+  "id": 1,
+  "balance": -100
+}
+
+### Deposite money for User1 (ноль) 400
+POST http://localhost:4111/api/v1/accounts/deposit
+content-Type: application/json
+Authorization: Basic a2F0ZTE5OTgyOkthdGUxOTk4MSE=
+
+{
+  "id": 1,
+  "balance": 0
+}
+
+### Deposite money for User1 (Депозит без авторизации) 400
+POST http://localhost:4111/api/v1/accounts/deposit
+content-Type: application/json
+
+{
+  "id": 1,
+  "balance": 100
+}
+
+### Deposite money for User1 (токен Админа) 400
+POST http://localhost:4111/api/v1/accounts/deposit
+content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "id": 1,
+  "balance": 100
+}
+
+### Deposite money for User1 (токен другого юзера) 400
+POST http://localhost:4111/api/v1/accounts/deposit
+content-Type: application/json
+Authorization: Basic a2F0ZTE5OTE6VGVzdDEyMyE=
+
+{
+  "id": 1,
+  "balance": 100
+}
+
+### Deposite money for User3 (Нет аккаунта-счета) 400
+POST http://localhost:4111/api/v1/accounts/deposit
+content-Type: application/json
+Authorization: Basic VGVzdGVyMTIzOlRlc3QxMjMh
+
+{
+  "id": 4,
+  "balance": 100
+}
+
+### Get All Users
+GET http://localhost:4111/api/v1/admin/users
+content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+### Transfer money User 1 -> User 2 (целое число) 200
+POST http://localhost:4111/api/v1/accounts/transfer
+content-Type: application/json
+Authorization: Basic a2F0ZTE5OTgyOkthdGUxOTk4MSE=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 100
+}
+
+### Transfer money User 1 -> User 2 (ноль) 400
+POST http://localhost:4111/api/v1/accounts/transfer
+content-Type: application/json
+Authorization: Basic a2F0ZTE5OTgyOkthdGUxOTk4MSE=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 0
+}
+
+### Transfer money User 1 -> User 2 (перевод - 1 копейка) 200
+POST http://localhost:4111/api/v1/accounts/transfer
+content-Type: application/json
+Authorization: Basic a2F0ZTE5OTgyOkthdGUxOTk4MSE=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 0.01
+}
+
+### Transfer money User 1 -> User 2 (перевод отрицательного числа) 400
+POST http://localhost:4111/api/v1/accounts/transfer
+content-Type: application/json
+Authorization: Basic a2F0ZTE5OTgyOkthdGUxOTk4MSE=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": -100
+}
+
+### Transfer money User 1 -> User 3 (перевод на несуществующий аккаунт-счет) 400
+POST http://localhost:4111/api/v1/accounts/transfer
+content-Type: application/json
+Authorization: Basic a2F0ZTE5OTgyOkthdGUxOTk4MSE=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 4,
+  "amount": 100
+}
+
+### Transfer money User 1 -> User 2 (токен Админа) 400
+POST http://localhost:4111/api/v1/accounts/transfer
+content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 100
+}
+
+### Transfer money User 1 -> User 2 (токен User2) 400
+POST http://localhost:4111/api/v1/accounts/transfer
+content-Type: application/json
+Authorization: Basic a2F0ZTE5OTE6VGVzdDEyMyE=
+
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 100
+}
+
+### Get customer accounts User 1
+GET http://localhost:4111/api/v1/customer/accounts
+Authorization: Basic Um9tYTEyMzk5OTpLYXRlMTk5ODEh
+
+### Transfer money User 2 -> User 1 (перевод обратно на первого юзера) 200
+POST http://localhost:4111/api/v1/accounts/transfer
+content-Type: application/json
+Authorization: Basic a2F0ZTE5OTE6VGVzdDEyMyE=
+
+{
+  "senderAccountId": 2,
+  "receiverAccountId": 1,
+  "amount": 100
+}
+
+### Get customer accounts User 2
+GET http://localhost:4111/api/v1/customer/accounts
+Authorization: Basic a2F0ZTE5OTE6VGVzdDEyMyE=
+
+### Update name (Верхний и нижный регистр)
+PUT http://localhost:4111/api/v1/customer/profile
+content-Type: application/json
+Authorization: Basic Um9tMWExMjM5OTk6S2F0ZTE5OTgxIQ==
+
+{
+  "name": "Murka"
+}
+
+### Update name (Цифры)
+PUT http://localhost:4111/api/v1/customer/profile
+content-Type: application/json
+Authorization: Basic Um9tMWExMjM5OTk6S2F0ZTE5OTgxIQ==
+
+{
+  "name": "12345"
+}
+
+### Update name (Русские буквы)
+PUT http://localhost:4111/api/v1/customer/profile
+content-Type: application/json
+Authorization: Basic Um9tMWExMjM5OTk6S2F0ZTE5OTgxIQ==
+
+{
+  "name": "Мурка"
+}
+
+### Update name (Пустое поле)
+PUT http://localhost:4111/api/v1/customer/profile
+content-Type: application/json
+Authorization: Basic Um9tMWExMjM5OTk6S2F0ZTE5OTgxIQ==
+
+{
+  "name": ""
+}
+
+### Update name (Пробелы)
+PUT http://localhost:4111/api/v1/customer/profile
+content-Type: application/json
+Authorization: Basic Um9tMWExMjM5OTk6S2F0ZTE5OTgxIQ==
+
+{
+  "name": "  "
+}
+
+### Update name (Короткое имя)
+PUT http://localhost:4111/api/v1/customer/profile
+content-Type: application/json
+Authorization: Basic Um9tMWExMjM5OTk6S2F0ZTE5OTgxIQ==
+
+{
+  "name": "M"
+}
+
+### Update name (Длинное имя 100 символов)
+PUT http://localhost:4111/api/v1/customer/profile
+content-Type: application/json
+Authorization: Basic Um9tMWExMjM5OTk6S2F0ZTE5OTgxIQ==
+
+{
+  "name": "аааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа"
+}
+
+### Update name (Разные типы)
+PUT http://localhost:4111/api/v1/customer/profile
+content-Type: application/json
+Authorization: Basic Um9tMWExMjM5OTk6S2F0ZTE5OTgxIQ==
+
+{
+  "name": "Murka123!%,._-+"
+}
+
+
+
+
+### Update name (Проверка уникальности имени)
+PUT http://localhost:4111/api/v1/customer/profile
+content-Type: application/json
+Authorization: Basic Um9tMWExMjM5OTk6S2F0ZTE5OTgxIQ==
+
+{
+  "name": "Murka"
+}
+
+###
+PUT http://localhost:4111/api/v1/customer/profile
+content-Type: application/json
+Authorization: Basic a2F0ZTE5OTE6VGVzdDEyMyE=
+
+{
+  "name": "Murka"
+}
