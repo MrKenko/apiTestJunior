@@ -6,6 +6,8 @@ import api.requests.steps.AdminSteps;
 import api.requests.steps.UserSteps;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selectors;
+import common.annotations.UserSession;
+import common.storage.SessionStorage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,18 +29,21 @@ public class DepositTest extends BaseUiTest {
     static double invalidAmount = -50;
     static double emptyAmount;
 
-    @BeforeAll
-    public static void setupUserName() {
-        CreateUserRequest userRequestFirst = AdminSteps.createUser();
-        userAuthHeader = UserSteps.loginAndGetToken(userRequestFirst);
-        accountNumberUser = UserSteps.createAccountAndGetNumber(userAuthHeader);
-
-        authAsUser(userRequestFirst);
-    }
+//    @BeforeAll
+//    public static void setupUserName() {
+//        CreateUserRequest userRequestFirst = AdminSteps.createUser();
+//        userAuthHeader = UserSteps.loginAndGetToken(userRequestFirst);
+//        accountNumberUser = UserSteps.createAccountAndGetNumber(userAuthHeader);
+//
+//        authAsUser(userRequestFirst);
+//    }
 
 
     @Test
+    @UserSession
     public void userCanMakeDepositTest() {
+       accountNumberUser = SessionStorage.getSteps().createAccountAndGetNumberUi();
+
 
         new DepositPage().open().selectAccount(accountNumberUser).enterAmountAndConfirmDeposit(defaultAmount).checkAlertMessageAndAccept(BankAlert.SUCCESS_DEPOSIT.format(defaultAmount, accountNumberUser));
 
@@ -48,7 +53,7 @@ public class DepositTest extends BaseUiTest {
         softly.assertThat(defaultAmount).isEqualTo(resultBalance);
 
         //Проверка, что сумма депозита равна сумме баланса в API
-        GetUserAccountResponse getUserBalance = UserSteps.getUserAccount(userAuthHeader);
+        GetUserAccountResponse getUserBalance = SessionStorage.getSteps().getUserAccountUi();
         softly.assertThat(defaultAmount).isEqualTo(getUserBalance.getBalance());
     }
 
@@ -62,16 +67,18 @@ public class DepositTest extends BaseUiTest {
 
     @ParameterizedTest
     @MethodSource("invalidDepositData")
+    @UserSession
     public void userEnterInvalidDataTest(double amount) {
+        accountNumberUser = SessionStorage.getSteps().createAccountAndGetNumberUi();
 
         //Получение баланса до попытки сделать депозит с невалидной суммой
-        GetUserAccountResponse getUserBalanceBefore = UserSteps.getUserAccount(userAuthHeader);
+        GetUserAccountResponse getUserBalanceBefore = SessionStorage.getSteps().getUserAccountUi();
 
         new UserDashboard().open().depositMoneyButton().getDepositMoneyButton().shouldBe(Condition.visible).shouldHave(Condition.text("\uD83D\uDCB0 Deposit Money"));
         new DepositPage().open().selectAccount(accountNumberUser).enterAmountAndConfirmDeposit(amount).checkAlertMessageAndAccept(BankAlert.INVALID_AMOUNT.getMessage());
 
         //Получение баланса после попытки сделать депозит с невалидной суммой
-        GetUserAccountResponse getUserBalanceAfter = UserSteps.getUserAccount(userAuthHeader);
+        GetUserAccountResponse getUserBalanceAfter = SessionStorage.getSteps().getUserAccountUi();
 
         //Проверка, что баланс не поменялся, после попытки сделать депозит с некорректным значением в UI
         new DepositPage().open();
@@ -83,16 +90,18 @@ public class DepositTest extends BaseUiTest {
     }
 
     @Test
+    @UserSession
     public void userDontSelectAccountTest() {
+        accountNumberUser = SessionStorage.getSteps().createAccountAndGetNumberUi();
 
         //Получение баланса до попытки сделать депозит с невалидной суммой
-        GetUserAccountResponse getUserBalanceBefore = UserSteps.getUserAccount(userAuthHeader);
+        GetUserAccountResponse getUserBalanceBefore = SessionStorage.getSteps().getUserAccountUi();
 
         new UserDashboard().open().depositMoneyButton().getDepositMoneyButton().shouldBe(Condition.visible).shouldHave(Condition.text("\uD83D\uDCB0 Deposit Money"));
         new DepositPage().open().enterAmountAndConfirmDeposit(defaultAmount).checkAlertMessageAndAccept(BankAlert.NOT_SELECT_ACCOUNT.getMessage());
 
         //Получение баланса после попытки сделать депозит не выбрав аккаунт
-        GetUserAccountResponse getUserBalanceAfter = UserSteps.getUserAccount(userAuthHeader);
+        GetUserAccountResponse getUserBalanceAfter = SessionStorage.getSteps().getUserAccountUi();
 
         //Проверка, что баланс не поменялся, после попытки сделать депозит не выбрав аккаунт в UI
         new DepositPage().open();

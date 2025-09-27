@@ -1,10 +1,13 @@
 package iteration2.ui;
 
 import api.models.CreateUserRequest;
+import api.models.DepositUserResponse;
 import api.requests.steps.AdminSteps;
 import api.requests.steps.UserSteps;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selectors;
+import common.annotations.UserSession;
+import common.storage.SessionStorage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -48,6 +51,7 @@ public class TransferTest extends BaseUiTest {
 
 
     @Test
+    @UserSession(value = 2)
     public void userCanMakeTransfer() {
 
         //  Балансы ДО перевода

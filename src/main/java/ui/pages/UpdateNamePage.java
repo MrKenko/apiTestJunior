@@ -1,6 +1,7 @@
 package ui.pages;
 
 import com.codeborne.selenide.Selectors;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -16,6 +17,7 @@ public class UpdateNamePage extends BasePage<UpdateNamePage>{
 
     public UpdateNamePage updateName(String newName){
         inputNewName.setValue(newName);
+        Selenide.sleep(2000);
         saveButton.click();
         return this;
     }

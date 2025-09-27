@@ -1,14 +1,12 @@
 package iteration2.ui;
 
-import api.models.CreateUserRequest;
 import api.models.GetUserProfileResponse;
 import api.requests.skelethon.Endpoint;
 import api.requests.skelethon.reauests.ValidatedCrudRequester;
-import api.requests.steps.AdminSteps;
-import api.requests.steps.UserSteps;
 import api.specs.RequestSpecs;
 import api.specs.ResponseSpecs;
-import org.junit.jupiter.api.BeforeAll;
+import common.annotations.UserSession;
+import common.storage.SessionStorage;
 import org.junit.jupiter.api.Test;
 import ui.pages.BankAlert;
 import ui.pages.UpdateNamePage;
@@ -19,15 +17,10 @@ public class UpdateNameTest extends BaseUiTest {
     static String defaultName = "Мурка";
     static String incorrectName = "";
 
-    @BeforeAll
-    public static void setupUserName() {
-        CreateUserRequest userRequestFirst = AdminSteps.createUser();
-        userAuthHeader = UserSteps.loginAndGetToken(userRequestFirst);
-        authAsUser(userRequestFirst);
-    }
-
     @Test
+    @UserSession
     public void userCanUpdateName() {
+        userAuthHeader = SessionStorage.getSteps().loginAndGetTokenForUi();
 
         new UpdateNamePage().open().updateName(defaultName).checkAlertMessageAndAccept(BankAlert.SUCCESS_UPDATE_NAME.getMessage());
 
@@ -45,10 +38,14 @@ public class UpdateNameTest extends BaseUiTest {
                 .get();
         softly.assertThat(profileName).isEqualTo(getUserProfile.getName());
         softly.assertThat(welcomeName).isEqualTo(getUserProfile.getName());
+
+        SessionStorage.clear();
     }
 
     @Test
+    @UserSession
     public void userCanNotUpdateIncorrectName() {
+        userAuthHeader = SessionStorage.getSteps().loginAndGetTokenForUi();
 
         new UpdateNamePage().open().updateName(incorrectName).checkAlertMessageAndAccept(BankAlert.ENTER_A_VALID_NAME.getMessage());
 
@@ -68,5 +65,7 @@ public class UpdateNameTest extends BaseUiTest {
                 .get();
         softly.assertThat(profileName).isNotEqualTo(getUserProfile.getName());
         softly.assertThat(welcomeName).isNotEqualTo(getUserProfile.getName());
+
+        SessionStorage.clear();
     }
 }
