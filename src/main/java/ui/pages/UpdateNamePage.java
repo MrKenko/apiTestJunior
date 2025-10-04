@@ -1,8 +1,10 @@
 package ui.pages;
 
 import com.codeborne.selenide.Selectors;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import common.utils.RetryUtils;
+
+import java.util.Objects;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -16,9 +18,18 @@ public class UpdateNamePage extends BasePage<UpdateNamePage>{
     }
 
     public UpdateNamePage updateName(String newName){
-        inputNewName.setValue(newName);
-        Selenide.sleep(2000);
-        saveButton.click();
+        RetryUtils.retry(
+                () -> {
+                    inputNewName.setValue(newName);
+                    return Objects.requireNonNull(inputNewName.getValue());
+                },
+                newName::equals,   // проверяем, что введённое значение отобразилось
+                3,
+                1000
+        );
+
+        saveButton.click(); // кнопка вне ретрая
+
         return this;
     }
 }

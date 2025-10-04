@@ -21,7 +21,7 @@ public class TransferPage extends BasePage<TransferPage>{
     }
     public TransferPage selectAccount(String accountNumber) {
         accountDropdown.click();
-        $(Selectors.byText(accountNumber)).shouldBe(Condition.visible).click();
+        $(Selectors.byText(accountNumber)).click();
         return this;
     }
 

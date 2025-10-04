@@ -51,7 +51,6 @@ public class TransferTest extends BaseUiTest {
 
 
     @Test
-    @UserSession(value = 2)
     public void userCanMakeTransfer() {
 
         //  Балансы ДО перевода
