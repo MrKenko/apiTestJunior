@@ -1,141 +1,88 @@
 package iteration2.ui;
 
+import api.models.CreateUserRequest;
+import api.models.GetUserAccountResponse;
+import api.requests.steps.AdminSteps;
+import api.requests.steps.UserSteps;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selectors;
-import com.codeborne.selenide.Selenide;
-import iteration2.api.BaseTest;
-import models.CreateUserRequest;
-import models.GetUserAccountResponse;
+import common.annotations.UserSession;
+import common.storage.SessionStorage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.openqa.selenium.Alert;
-import requests.steps.AdminSteps;
-import requests.steps.UserSteps;
+import ui.pages.BankAlert;
+import ui.pages.DepositPage;
+import ui.pages.UserDashboard;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.stream.Stream;
 
-import static com.codeborne.selenide.Selenide.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static com.codeborne.selenide.Selenide.$;
 
-public class DepositTest extends BaseTest {
+public class DepositTest extends BaseUiTest {
     static String userAuthHeader;
+    static String accountNumberUser;
     static double defaultAmount = 50;
     static double invalidAmount = -50;
     static double emptyAmount;
-    static String notSelectAccountAlert = "❌ Please select an account.";
-    static String invalidAmountAlert = "❌ Please enter a valid amount.";
 
-    @BeforeAll
-    public static void setupSelenoid() {
-        Configuration.remote = "http://192.168.1.9:4444/wd/hub";
-        Configuration.baseUrl = "http://172.23.96.1:3000";
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1920x1080";
+//    @BeforeAll
+//    public static void setupUserName() {
+//        CreateUserRequest userRequestFirst = AdminSteps.createUser();
+//        userAuthHeader = UserSteps.loginAndGetToken(userRequestFirst);
+//        accountNumberUser = UserSteps.createAccountAndGetNumber(userAuthHeader);
+//
+//        authAsUser(userRequestFirst);
+//    }
 
-        Configuration.browserCapabilities.setCapability("selenoid:options",
-                Map.of("enableVNC", true, "enableLog", true)
-        );
-
-    }
 
     @Test
+    @UserSession
     public void userCanMakeDepositTest() {
+       accountNumberUser = SessionStorage.getSteps().createAccountAndGetNumberUi();
 
-        //Пред шаги
 
-        CreateUserRequest userRequestFirst = AdminSteps.createUser();
-        userAuthHeader = UserSteps.loginAndGetToken(userRequestFirst);
-        String accountNumberUser = UserSteps.createAccountAndGetNumber(userAuthHeader);
-
-        Selenide.open("/");
-
-        executeJavaScript("localStorage.setItem('authToken', arguments[0])", userAuthHeader);
-
-        Selenide.open("/dashboard");
-
-        //ШАГИ ТЕСТА
-        //Юзер делает депозит
-        $(Selectors.byText("\uD83D\uDCB0 Deposit Money")).click();
-        $(Selectors.byText("\uD83D\uDCB0 Deposit Money")).shouldBe(Condition.visible);
-        $(Selectors.byText("-- Choose an account --")).click();
-        $(Selectors.byText(accountNumberUser)).shouldBe(Condition.visible);
-        $(Selectors.byText(accountNumberUser)).click();
-        $(Selectors.byAttribute("placeholder", "Enter amount")).sendKeys(String.valueOf(defaultAmount));
-        $(Selectors.byText("\uD83D\uDCB5 Deposit")).click();
-
-        Alert alert = switchTo().alert();
-
-        //Проверка алерта
-        softly.assertThat(alert.getText()).isEqualTo("✅ Successfully deposited $" + defaultAmount + " to account " + accountNumberUser + "!");
-        alert.accept();
+        new DepositPage().open().selectAccount(accountNumberUser).enterAmountAndConfirmDeposit(defaultAmount).checkAlertMessageAndAccept(BankAlert.SUCCESS_DEPOSIT.format(defaultAmount, accountNumberUser));
 
         //Проверка что сумма депозита равна сумме баланса в UI
-        $(Selectors.byText("\uD83D\uDCB0 Deposit Money")).click();
-        $(Selectors.byText("\uD83D\uDCB0 Deposit Money")).shouldBe(Condition.visible);
-        $(Selectors.byText("-- Choose an account --")).click();
-
+        new DepositPage().open();
         double resultBalance = getBalanceAsDouble(accountNumberUser);
-
         softly.assertThat(defaultAmount).isEqualTo(resultBalance);
 
         //Проверка, что сумма депозита равна сумме баланса в API
-        GetUserAccountResponse getUserBalance = UserSteps.getUserAccount(userAuthHeader);
+        GetUserAccountResponse getUserBalance = SessionStorage.getSteps().getUserAccountUi();
         softly.assertThat(defaultAmount).isEqualTo(getUserBalance.getBalance());
     }
 
 
     public static Stream<Arguments> invalidDepositData() {
         return Stream.of(
-                Arguments.of(invalidAmount, invalidAmountAlert),
-                Arguments.of(emptyAmount, invalidAmountAlert)
+                Arguments.of(invalidAmount),
+                Arguments.of(emptyAmount)
         );
     }
 
     @ParameterizedTest
     @MethodSource("invalidDepositData")
-    public void userEnterInvalidDataTest(double Amount, String alertText) {
-        //Пред шаги
-
-        CreateUserRequest userRequestFirst = AdminSteps.createUser();
-        userAuthHeader = UserSteps.loginAndGetToken(userRequestFirst);
-        String accountNumberUser = UserSteps.createAccountAndGetNumber(userAuthHeader);
-        Selenide.open("/");
-        executeJavaScript("localStorage.setItem('authToken', arguments[0])", userAuthHeader);
-        Selenide.open("/dashboard");
+    @UserSession
+    public void userEnterInvalidDataTest(double amount) {
+        accountNumberUser = SessionStorage.getSteps().createAccountAndGetNumberUi();
 
         //Получение баланса до попытки сделать депозит с невалидной суммой
-        GetUserAccountResponse getUserBalanceBefore = UserSteps.getUserAccount(userAuthHeader);
+        GetUserAccountResponse getUserBalanceBefore = SessionStorage.getSteps().getUserAccountUi();
 
-        //Шаги теста
-        $(Selectors.byText("\uD83D\uDCB0 Deposit Money")).click();
-        $(Selectors.byText("\uD83D\uDCB0 Deposit Money")).shouldBe(Condition.visible);
-        $(Selectors.byText("-- Choose an account --")).click();
-        $(Selectors.byText(accountNumberUser)).shouldBe(Condition.visible);
-        $(Selectors.byText(accountNumberUser)).click();
-        $(Selectors.byAttribute("placeholder", "Enter amount")).sendKeys(String.valueOf(Amount));
-        $(Selectors.byText("\uD83D\uDCB5 Deposit")).click();
-
-        Alert alert = switchTo().alert();
-        //Проверка алерта
-        softly.assertThat(alertText).isEqualTo(alert.getText());
-        alert.accept();
+        new UserDashboard().open().depositMoneyButton().getDepositMoneyButton().shouldBe(Condition.visible).shouldHave(Condition.text("\uD83D\uDCB0 Deposit Money"));
+        new DepositPage().open().selectAccount(accountNumberUser).enterAmountAndConfirmDeposit(amount).checkAlertMessageAndAccept(BankAlert.INVALID_AMOUNT.getMessage());
 
         //Получение баланса после попытки сделать депозит с невалидной суммой
-        GetUserAccountResponse getUserBalanceAfter = UserSteps.getUserAccount(userAuthHeader);
+        GetUserAccountResponse getUserBalanceAfter = SessionStorage.getSteps().getUserAccountUi();
 
         //Проверка, что баланс не поменялся, после попытки сделать депозит с некорректным значением в UI
-        $(Selectors.byText("\uD83D\uDCB0 Deposit Money")).click();
-        $(Selectors.byText("\uD83D\uDCB0 Deposit Money")).shouldBe(Condition.visible);
-
-
+        new DepositPage().open();
         double resultBalance = getBalanceAsDouble(accountNumberUser);
-
         softly.assertThat(getUserBalanceAfter.getBalance()).isEqualTo(resultBalance);
 
         //Проверка, что баланс не поменялся, после попытки сделать депозит с некорректным значением в API
@@ -143,46 +90,22 @@ public class DepositTest extends BaseTest {
     }
 
     @Test
+    @UserSession
     public void userDontSelectAccountTest() {
-
-        //Пред шаги
-
-        CreateUserRequest userRequestFirst = AdminSteps.createUser();
-        userAuthHeader = UserSteps.loginAndGetToken(userRequestFirst);
-        String accountNumberUser = UserSteps.createAccountAndGetNumber(userAuthHeader);
-
-        Selenide.open("/");
-
-        executeJavaScript("localStorage.setItem('authToken', arguments[0])", userAuthHeader);
-
-        Selenide.open("/dashboard");
+        accountNumberUser = SessionStorage.getSteps().createAccountAndGetNumberUi();
 
         //Получение баланса до попытки сделать депозит с невалидной суммой
-        GetUserAccountResponse getUserBalanceBefore = UserSteps.getUserAccount(userAuthHeader);
+        GetUserAccountResponse getUserBalanceBefore = SessionStorage.getSteps().getUserAccountUi();
 
-        //ШАГИ ТЕСТА
-        //Юзер делает депозит
-        $(Selectors.byText("\uD83D\uDCB0 Deposit Money")).click();
-        $(Selectors.byText("\uD83D\uDCB0 Deposit Money")).shouldBe(Condition.visible);
-        $(Selectors.byAttribute("placeholder", "Enter amount")).sendKeys(String.valueOf(defaultAmount));
-        $(Selectors.byText("\uD83D\uDCB5 Deposit")).click();
-
-        Alert alert = switchTo().alert();
-
-        //Проверка алерта
-        softly.assertThat(alert.getText()).isEqualTo(notSelectAccountAlert);
-        alert.accept();
+        new UserDashboard().open().depositMoneyButton().getDepositMoneyButton().shouldBe(Condition.visible).shouldHave(Condition.text("\uD83D\uDCB0 Deposit Money"));
+        new DepositPage().open().enterAmountAndConfirmDeposit(defaultAmount).checkAlertMessageAndAccept(BankAlert.NOT_SELECT_ACCOUNT.getMessage());
 
         //Получение баланса после попытки сделать депозит не выбрав аккаунт
-        GetUserAccountResponse getUserBalanceAfter = UserSteps.getUserAccount(userAuthHeader);
+        GetUserAccountResponse getUserBalanceAfter = SessionStorage.getSteps().getUserAccountUi();
 
         //Проверка, что баланс не поменялся, после попытки сделать депозит не выбрав аккаунт в UI
-        $(Selectors.byText("\uD83D\uDCB0 Deposit Money")).click();
-        $(Selectors.byText("\uD83D\uDCB0 Deposit Money")).shouldBe(Condition.visible);
-
-
+        new DepositPage().open();
         double resultBalance = getBalanceAsDouble(accountNumberUser);
-
         softly.assertThat(getUserBalanceAfter.getBalance()).isEqualTo(resultBalance);
 
         //Проверка, что баланс не поменялся, после попытки сделать депозит не выбрав аккаунт в API
@@ -206,6 +129,5 @@ public class DepositTest extends BaseTest {
         numberPart = numberPart.replace("$", "").replace(",", "");
 
         return Double.parseDouble(numberPart);
-
     }
 }
