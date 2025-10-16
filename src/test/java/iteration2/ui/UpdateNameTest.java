@@ -12,9 +12,11 @@ import ui.pages.BankAlert;
 import ui.pages.UpdateNamePage;
 import ui.pages.UserDashboard;
 
+import static com.codeborne.selenide.Condition.text;
+
 public class UpdateNameTest extends BaseUiTest {
     static String userAuthHeader;
-    static String defaultName = "Мурка";
+    static String defaultName = "Murka kisa";
     static String incorrectName = "";
 
     @Test
@@ -26,8 +28,8 @@ public class UpdateNameTest extends BaseUiTest {
 
         UserDashboard dashboard = new UserDashboard().open().getPage(UserDashboard.class);
 
-        String profileName = dashboard.getProfileName().getText();
-        String welcomeName = dashboard.getWelcomeName().getText();
+        String profileName = dashboard.getProfileName().shouldHave(text(defaultName)).getText();
+        String welcomeName = dashboard.getWelcomeName().shouldHave(text(defaultName)).getText();
 
         //Проверка имени в UI
         softly.assertThat(profileName).isEqualTo(defaultName);

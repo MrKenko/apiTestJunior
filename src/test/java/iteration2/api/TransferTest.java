@@ -125,7 +125,7 @@ public class TransferTest extends BaseTest {
                 .amount(transferBalance)
                 .build();
 
-        new CrudRequester(RequestSpecs.userSpec(userAuthSender), Endpoint.TRANSFER, ResponseSpecs.requestReturnsBadRequestText("Invalid transfer: insufficient funds or invalid accounts"))
+        new CrudRequester(RequestSpecs.userSpec(userAuthSender), Endpoint.TRANSFER, ResponseSpecs.requestReturnsBadRequestText("Transfer amount must be at least 0.01"))
                 .post(transferUserRequest);
 
         //Балансы после перевода

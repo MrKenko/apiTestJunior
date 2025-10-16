@@ -77,8 +77,8 @@ public class DepositTest extends BaseTest {
 
     public static Stream<Arguments> invalidDepositData() {
         return Stream.of(
-                Arguments.of(0, "Invalid account or amount"),
-                Arguments.of(-100, "Invalid account or amount")
+                Arguments.of(0, "Deposit amount must be at least 0.01"),
+                Arguments.of(-100, "Deposit amount must be at least 0.01")
                 );
     }
 
