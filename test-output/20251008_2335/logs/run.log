@@ -1,0 +1,5078 @@
+>>> Running tests with profile: api
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "1pFub3VqJaG",
+    "password": "YGXxzkz559$%",
+    "role": "USER"
+}
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic MXBGdWIzVnFKYUc6WUdYeHprejU1OSQl
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:20 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 145,
+    "username": "1pFub3VqJaG",
+    "password": "$2a$10$19awaJhv6rjL5dPsEz2houKgbFJ.wL13AzzM0FYHL4bB1XXy.xlIW",
+    "name": null,
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/auth/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "1pFub3VqJaG",
+    "password": "YGXxzkz559$%"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic MXBGdWIzVnFKYUc6WUdYeHprejU1OSQl
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:20 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "username": "1pFub3VqJaG",
+    "role": "USER"
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/auth/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "admin",
+    "password": "admin"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic YWRtaW46YWRtaW4=
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:20 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "username": "admin",
+    "role": "ADMIN"
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "4dYAGVtUK",
+    "password": "ISSnhkn042%%",
+    "role": "USER"
+}
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:21 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 146,
+    "username": "4dYAGVtUK",
+    "password": "$2a$10$AL9ijOVFOsmomNptAlABtOuvn1dULwLFK/YRRyA45RtPJzVarm1Be",
+    "name": null,
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/auth/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "4dYAGVtUK",
+    "password": "ISSnhkn042%%"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:21 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "username": "4dYAGVtUK",
+    "role": "USER"
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:21 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 67,
+    "accountNumber": "ACC67",
+    "balance": 0.0,
+    "transactions": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "FzA349KmUtkrjb",
+    "password": "EARqgob388%$",
+    "role": "USER"
+}
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:23 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 147,
+    "username": "FzA349KmUtkrjb",
+    "password": "$2a$10$308KItCtyLCdmcfJVf9BjOaw5DJbRW7PZJmL7yMVBYbUL5CzkS4fW",
+    "name": null,
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/auth/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "FzA349KmUtkrjb",
+    "password": "EARqgob388%$"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:23 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "username": "FzA349KmUtkrjb",
+    "role": "USER"
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:23 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 68,
+    "accountNumber": "ACC68",
+    "balance": 0.0,
+    "transactions": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "tHQnNU0",
+    "password": "CJNjboq454%%",
+    "role": "USER"
+}
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic dEhRbk5VMDpDSk5qYm9xNDU0JSU=
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:24 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 148,
+    "username": "tHQnNU0",
+    "password": "$2a$10$iYsoD8f.XqKqk7LGoggnpu3qa66skSrPYiwWnIRoBldUqYGJZ67/m",
+    "name": null,
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/auth/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "tHQnNU0",
+    "password": "CJNjboq454%%"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic dEhRbk5VMDpDSk5qYm9xNDU0JSU=
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:24 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "username": "tHQnNU0",
+    "role": "USER"
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic dEhRbk5VMDpDSk5qYm9xNDU0JSU=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:24 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 148,
+    "username": "tHQnNU0",
+    "password": "$2a$10$iYsoD8f.XqKqk7LGoggnpu3qa66skSrPYiwWnIRoBldUqYGJZ67/m",
+    "name": null,
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:24 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 0.0,
+        "transactions": [
+            
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/deposit
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 67,
+    "balance": 300.0
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:25 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 67,
+    "accountNumber": "ACC67",
+    "balance": 300.0,
+    "transactions": [
+        {
+            "id": 118,
+            "amount": 300.0,
+            "type": "DEPOSIT",
+            "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+            "relatedAccountId": 67
+        }
+    ]
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:25 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 300.0,
+        "transactions": [
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:25 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 300.0,
+        "transactions": [
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:25 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 68,
+        "accountNumber": "ACC68",
+        "balance": 0.0,
+        "transactions": [
+            
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/transfer
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "senderAccountId": 67,
+    "receiverAccountId": 68,
+    "amount": 50.0
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:26 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "receiverAccountId": 68,
+    "amount": 50.0,
+    "message": "Transfer successful",
+    "senderAccountId": 67
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:26 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 250.0,
+        "transactions": [
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:26 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 68,
+        "accountNumber": "ACC68",
+        "balance": 50.0,
+        "transactions": [
+            {
+                "id": 120,
+                "amount": 50.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:28 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 250.0,
+        "transactions": [
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:28 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 68,
+        "accountNumber": "ACC68",
+        "balance": 50.0,
+        "transactions": [
+            {
+                "id": 120,
+                "amount": 50.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/transfer
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "senderAccountId": 67,
+    "receiverAccountId": 68,
+    "amount": 0.01
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:28 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "receiverAccountId": 68,
+    "amount": 0.01,
+    "message": "Transfer successful",
+    "senderAccountId": 67
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:28 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 249.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:28 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 68,
+        "accountNumber": "ACC68",
+        "balance": 50.01,
+        "transactions": [
+            {
+                "id": 122,
+                "amount": 0.01,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 120,
+                "amount": 50.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:29 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 68,
+        "accountNumber": "ACC68",
+        "balance": 50.01,
+        "transactions": [
+            {
+                "id": 122,
+                "amount": 0.01,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 120,
+                "amount": 50.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:29 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 249.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/transfer
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "senderAccountId": 68,
+    "receiverAccountId": 67,
+    "amount": 10.0
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:29 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "receiverAccountId": 67,
+    "amount": 10.0,
+    "message": "Transfer successful",
+    "senderAccountId": 68
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:29 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 68,
+        "accountNumber": "ACC68",
+        "balance": 40.01,
+        "transactions": [
+            {
+                "id": 122,
+                "amount": 0.01,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 120,
+                "amount": 50.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 123,
+                "amount": 10.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:30 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 259.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 124,
+                "amount": 10.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 68
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:30 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 259.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 124,
+                "amount": 10.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 68
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:30 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 68,
+        "accountNumber": "ACC68",
+        "balance": 40.01,
+        "transactions": [
+            {
+                "id": 122,
+                "amount": 0.01,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 120,
+                "amount": 50.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 123,
+                "amount": 10.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/transfer
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "senderAccountId": 68,
+    "receiverAccountId": 67,
+    "amount": 50.0
+}
+HTTP/1.1 403 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Content-Length: 30
+Date: Wed, 08 Oct 2025 20:35:30 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+Unauthorized access to account
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:31 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 259.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 124,
+                "amount": 10.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 68
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:31 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 68,
+        "accountNumber": "ACC68",
+        "balance": 40.01,
+        "transactions": [
+            {
+                "id": 122,
+                "amount": 0.01,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 120,
+                "amount": 50.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 123,
+                "amount": 10.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:31 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 259.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 124,
+                "amount": 10.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 68
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:31 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 68,
+        "accountNumber": "ACC68",
+        "balance": 40.01,
+        "transactions": [
+            {
+                "id": 122,
+                "amount": 0.01,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 120,
+                "amount": 50.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 123,
+                "amount": 10.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/transfer
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "senderAccountId": 67,
+    "receiverAccountId": 68,
+    "amount": 50.0
+}
+HTTP/1.1 403 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:31 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "timestamp": "2025-10-08T20:35:32.295+00:00",
+    "status": 403,
+    "error": "Forbidden",
+    "path": "/api/v1/accounts/transfer"
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:32 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 259.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 124,
+                "amount": 10.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 68
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:32 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 68,
+        "accountNumber": "ACC68",
+        "balance": 40.01,
+        "transactions": [
+            {
+                "id": 122,
+                "amount": 0.01,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 120,
+                "amount": 50.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 123,
+                "amount": 10.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:32 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 259.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 124,
+                "amount": 10.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 68
+            }
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/transfer
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic dEhRbk5VMDpDSk5qYm9xNDU0JSU=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "senderAccountId": 148,
+    "receiverAccountId": 67,
+    "amount": 50.0
+}
+HTTP/1.1 403 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Content-Length: 30
+Date: Wed, 08 Oct 2025 20:35:32 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+Unauthorized access to account
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:33 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 259.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 124,
+                "amount": 10.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 68
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:33 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 259.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 124,
+                "amount": 10.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 68
+            }
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/transfer
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "senderAccountId": 67,
+    "receiverAccountId": 148,
+    "amount": 50.0
+}
+HTTP/1.1 400 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Content-Length: 56
+Date: Wed, 08 Oct 2025 20:35:33 GMT
+Connection: close
+
+Invalid transfer: insufficient funds or invalid accounts
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:33 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 259.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 124,
+                "amount": 10.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 68
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:34 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 259.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 124,
+                "amount": 10.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 68
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:34 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 68,
+        "accountNumber": "ACC68",
+        "balance": 40.01,
+        "transactions": [
+            {
+                "id": 122,
+                "amount": 0.01,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 120,
+                "amount": 50.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 123,
+                "amount": 10.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/transfer
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "senderAccountId": 67,
+    "receiverAccountId": 68,
+    "amount": 0.0
+}
+HTTP/1.1 400 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Content-Length: 56
+Date: Wed, 08 Oct 2025 20:35:34 GMT
+Connection: close
+
+Invalid transfer: insufficient funds or invalid accounts
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:34 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 259.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 124,
+                "amount": 10.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 68
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:34 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 68,
+        "accountNumber": "ACC68",
+        "balance": 40.01,
+        "transactions": [
+            {
+                "id": 122,
+                "amount": 0.01,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 120,
+                "amount": 50.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 123,
+                "amount": 10.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:35 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 259.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 124,
+                "amount": 10.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 68
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:35 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 68,
+        "accountNumber": "ACC68",
+        "balance": 40.01,
+        "transactions": [
+            {
+                "id": 122,
+                "amount": 0.01,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 120,
+                "amount": 50.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 123,
+                "amount": 10.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/transfer
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "senderAccountId": 67,
+    "receiverAccountId": 68,
+    "amount": -100.0
+}
+HTTP/1.1 400 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Content-Length: 56
+Date: Wed, 08 Oct 2025 20:35:35 GMT
+Connection: close
+
+Invalid transfer: insufficient funds or invalid accounts
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NGRZQUdWdFVLOklTU25oa24wNDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:35 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 67,
+        "accountNumber": "ACC67",
+        "balance": 259.99,
+        "transactions": [
+            {
+                "id": 121,
+                "amount": 0.01,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 119,
+                "amount": 50.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 68
+            },
+            {
+                "id": 118,
+                "amount": 300.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:25 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 124,
+                "amount": 10.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 68
+            }
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic RnpBMzQ5S21VdGtyamI6RUFScWdvYjM4OCUk
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:35 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 68,
+        "accountNumber": "ACC68",
+        "balance": 40.01,
+        "transactions": [
+            {
+                "id": 122,
+                "amount": 0.01,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:28 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 120,
+                "amount": 50.0,
+                "type": "TRANSFER_IN",
+                "timestamp": "Wed Oct 08 20:35:26 UTC 2025",
+                "relatedAccountId": 67
+            },
+            {
+                "id": 123,
+                "amount": 10.0,
+                "type": "TRANSFER_OUT",
+                "timestamp": "Wed Oct 08 20:35:29 UTC 2025",
+                "relatedAccountId": 67
+            }
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "hC7UCm",
+    "password": "BDZgdil453%$",
+    "role": "USER"
+}
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:37 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 149,
+    "username": "hC7UCm",
+    "password": "$2a$10$Dz4Mx2bZr9fjcMii86zZmOtwrySztwdfNF0A6El/5jDbLlbJEd45y",
+    "name": null,
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/auth/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "hC7UCm",
+    "password": "BDZgdil453%$"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:37 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "username": "hC7UCm",
+    "role": "USER"
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:37 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 69,
+    "accountNumber": "ACC69",
+    "balance": 0.0,
+    "transactions": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "cG6990BvNab6",
+    "password": "EJQyxew367%$",
+    "role": "USER"
+}
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic Y0c2OTkwQnZOYWI2OkVKUXl4ZXczNjclJA==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:37 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 150,
+    "username": "cG6990BvNab6",
+    "password": "$2a$10$bKg4I1kGPLtKQHaueBNfbee8N6xCRUO0p5QA44UHe3y.ES4j6b9JW",
+    "name": null,
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/auth/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "cG6990BvNab6",
+    "password": "EJQyxew367%$"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic Y0c2OTkwQnZOYWI2OkVKUXl4ZXczNjclJA==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:38 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "username": "cG6990BvNab6",
+    "role": "USER"
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic Y0c2OTkwQnZOYWI2OkVKUXl4ZXczNjclJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:38 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 70,
+    "accountNumber": "ACC70",
+    "balance": 0.0,
+    "transactions": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "MKem9hm3wOucErG",
+    "password": "RDXasvq263%$",
+    "role": "USER"
+}
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic TUtlbTlobTN3T3VjRXJHOlJEWGFzdnEyNjMlJA==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:38 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 151,
+    "username": "MKem9hm3wOucErG",
+    "password": "$2a$10$1c8T8nnqFDgbWdIE.WZrxOPpP3EpXrFRVUsxsbo89MNR60/i6m6WS",
+    "name": null,
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/auth/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "MKem9hm3wOucErG",
+    "password": "RDXasvq263%$"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic TUtlbTlobTN3T3VjRXJHOlJEWGFzdnEyNjMlJA==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:38 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "username": "MKem9hm3wOucErG",
+    "role": "USER"
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic TUtlbTlobTN3T3VjRXJHOlJEWGFzdnEyNjMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:39 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 151,
+    "username": "MKem9hm3wOucErG",
+    "password": "$2a$10$1c8T8nnqFDgbWdIE.WZrxOPpP3EpXrFRVUsxsbo89MNR60/i6m6WS",
+    "name": null,
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:39 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 69,
+        "accountNumber": "ACC69",
+        "balance": 0.0,
+        "transactions": [
+            
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/deposit
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 69,
+    "balance": 50.0
+}
+HTTP/1.1 403 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:39 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "timestamp": "2025-10-08T20:35:40.390+00:00",
+    "status": 403,
+    "error": "Forbidden",
+    "path": "/api/v1/accounts/deposit"
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:39 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 69,
+        "accountNumber": "ACC69",
+        "balance": 0.0,
+        "transactions": [
+            
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:40 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 69,
+        "accountNumber": "ACC69",
+        "balance": 0.0,
+        "transactions": [
+            
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/deposit
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic Y0c2OTkwQnZOYWI2OkVKUXl4ZXczNjclJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 69,
+    "balance": 50.0
+}
+HTTP/1.1 403 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Content-Length: 30
+Date: Wed, 08 Oct 2025 20:35:40 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+Unauthorized access to account
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:40 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 69,
+        "accountNumber": "ACC69",
+        "balance": 0.0,
+        "transactions": [
+            
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:40 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 69,
+        "accountNumber": "ACC69",
+        "balance": 0.0,
+        "transactions": [
+            
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/deposit
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic TUtlbTlobTN3T3VjRXJHOlJEWGFzdnEyNjMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 69,
+    "balance": 50.0
+}
+HTTP/1.1 403 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Content-Length: 30
+Date: Wed, 08 Oct 2025 20:35:40 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+Unauthorized access to account
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:42 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 69,
+        "accountNumber": "ACC69",
+        "balance": 0.0,
+        "transactions": [
+            
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:42 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 69,
+        "accountNumber": "ACC69",
+        "balance": 0.0,
+        "transactions": [
+            
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/deposit
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 69,
+    "balance": 0.0
+}
+HTTP/1.1 400 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Content-Length: 25
+Date: Wed, 08 Oct 2025 20:35:42 GMT
+Connection: close
+
+Invalid account or amount
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:42 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 69,
+        "accountNumber": "ACC69",
+        "balance": 0.0,
+        "transactions": [
+            
+        ]
+    }
+]
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:43 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 69,
+        "accountNumber": "ACC69",
+        "balance": 0.0,
+        "transactions": [
+            
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/deposit
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 69,
+    "balance": -100.0
+}
+HTTP/1.1 400 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Content-Length: 25
+Date: Wed, 08 Oct 2025 20:35:43 GMT
+Connection: close
+
+Invalid account or amount
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:43 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 69,
+        "accountNumber": "ACC69",
+        "balance": 0.0,
+        "transactions": [
+            
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/deposit
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 69,
+    "balance": 50.0
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:43 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 69,
+    "accountNumber": "ACC69",
+    "balance": 50.0,
+    "transactions": [
+        {
+            "id": 125,
+            "amount": 50.0,
+            "type": "DEPOSIT",
+            "timestamp": "Wed Oct 08 20:35:43 UTC 2025",
+            "relatedAccountId": 69
+        }
+    ]
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:43 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 69,
+        "accountNumber": "ACC69",
+        "balance": 50.0,
+        "transactions": [
+            {
+                "id": 125,
+                "amount": 50.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:43 UTC 2025",
+                "relatedAccountId": 69
+            }
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts/deposit
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 69,
+    "balance": 0.01
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:44 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 69,
+    "accountNumber": "ACC69",
+    "balance": 50.01,
+    "transactions": [
+        {
+            "id": 125,
+            "amount": 50.0,
+            "type": "DEPOSIT",
+            "timestamp": "Wed Oct 08 20:35:43 UTC 2025",
+            "relatedAccountId": 69
+        },
+        {
+            "id": 126,
+            "amount": 0.01,
+            "type": "DEPOSIT",
+            "timestamp": "Wed Oct 08 20:35:44 UTC 2025",
+            "relatedAccountId": 69
+        }
+    ]
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aEM3VUNtOkJEWmdkaWw0NTMlJA==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:44 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 69,
+        "accountNumber": "ACC69",
+        "balance": 50.01,
+        "transactions": [
+            {
+                "id": 125,
+                "amount": 50.0,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:43 UTC 2025",
+                "relatedAccountId": 69
+            },
+            {
+                "id": 126,
+                "amount": 0.01,
+                "type": "DEPOSIT",
+                "timestamp": "Wed Oct 08 20:35:44 UTC 2025",
+                "relatedAccountId": 69
+            }
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "ibrVyICPmCO56J1",
+    "password": "AFEwldf988%&",
+    "role": "USER"
+}
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic aWJyVnlJQ1BtQ081NkoxOkFGRXdsZGY5ODglJg==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:44 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 152,
+    "username": "ibrVyICPmCO56J1",
+    "password": "$2a$10$5d/HeJssj4.2zsicKHIX2ucEkXZrTHx/uNsp2SDv1NjVbHgWPK/mW",
+    "name": null,
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/auth/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "ibrVyICPmCO56J1",
+    "password": "AFEwldf988%&"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic aWJyVnlJQ1BtQ081NkoxOkFGRXdsZGY5ODglJg==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:44 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "username": "ibrVyICPmCO56J1",
+    "role": "USER"
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aWJyVnlJQ1BtQ081NkoxOkFGRXdsZGY5ODglJg==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:45 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 71,
+    "accountNumber": "ACC71",
+    "balance": 0.0,
+    "transactions": [
+        
+    ]
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/accounts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic aWJyVnlJQ1BtQ081NkoxOkFGRXdsZGY5ODglJg==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:45 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+[
+    {
+        "id": 71,
+        "accountNumber": "ACC71",
+        "balance": 0.0,
+        "transactions": [
+            
+        ]
+    }
+]
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "  ",
+    "password": "Password33!",
+    "role": "USER"
+}
+HTTP/1.1 400 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:45 GMT
+Connection: close
+
+{
+    "username": [
+        "Username must contain only letters, digits, dashes, underscores, and dots",
+        "Username must be between 3 and 15 characters",
+        "Username cannot be blank"
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "ab",
+    "password": "Password33!",
+    "role": "USER"
+}
+HTTP/1.1 400 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:45 GMT
+Connection: close
+
+{
+    "username": [
+        "Username must be between 3 and 15 characters"
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "abc$",
+    "password": "Password33!",
+    "role": "USER"
+}
+HTTP/1.1 400 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:46 GMT
+Connection: close
+
+{
+    "username": [
+        "Username must contain only letters, digits, dashes, underscores, and dots"
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "abc%",
+    "password": "Password33!",
+    "role": "USER"
+}
+HTTP/1.1 400 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:46 GMT
+Connection: close
+
+{
+    "username": [
+        "Username must contain only letters, digits, dashes, underscores, and dots"
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "Y0P",
+    "password": "BWVkcms121%&",
+    "role": "USER"
+}
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic WTBQOkJXVmtjbXMxMjElJg==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:46 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 153,
+    "username": "Y0P",
+    "password": "$2a$10$y7FcyutVYPxk6z29YPTO1OBSChBL/MvrQjF5sVZTikPTp/6HtIRUW",
+    "name": null,
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/auth/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "Y0P",
+    "password": "BWVkcms121%&"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic WTBQOkJXVmtjbXMxMjElJg==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:47 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "username": "Y0P",
+    "role": "USER"
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic WTBQOkJXVmtjbXMxMjElJg==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:47 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 153,
+    "username": "Y0P",
+    "password": "$2a$10$y7FcyutVYPxk6z29YPTO1OBSChBL/MvrQjF5sVZTikPTp/6HtIRUW",
+    "name": null,
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "X6MLJp",
+    "password": "SMVintw183%&",
+    "role": "USER"
+}
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic WDZNTEpwOlNNVmludHcxODMlJg==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:47 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 154,
+    "username": "X6MLJp",
+    "password": "$2a$10$It0vQzlsKmhl/AAtg31Vce31BWeuBZ/XODRoslAXQwBAQfaIpk1ZG",
+    "name": null,
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/auth/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "X6MLJp",
+    "password": "SMVintw183%&"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic WDZNTEpwOlNNVmludHcxODMlJg==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:48 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "username": "X6MLJp",
+    "role": "USER"
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/admin/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "4RiD9U2B3OBhhIU",
+    "password": "IHCelcp102%%",
+    "role": "USER"
+}
+HTTP/1.1 201 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic NFJpRDlVMkIzT0JoaElVOklIQ2VsY3AxMDIlJQ==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:48 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 155,
+    "username": "4RiD9U2B3OBhhIU",
+    "password": "$2a$10$OuD7ekZFKO7sTgfXkxhUEe9/6b8B69kZrKGEto4BQR8BVIkID6FvO",
+    "name": null,
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	POST
+Request URI:	http://host.docker.internal:4111/api/v1/auth/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "4RiD9U2B3OBhhIU",
+    "password": "IHCelcp102%%"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Authorization: Basic NFJpRDlVMkIzT0JoaElVOklIQ2VsY3AxMDIlJQ==
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:48 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "username": "4RiD9U2B3OBhhIU",
+    "role": "USER"
+}
+Request method:	PUT
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic WDZNTEpwOlNNVmludHcxODMlJg==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "name": "Murka kisa"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:48 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "message": "Profile updated successfully",
+    "customer": {
+        "id": 154,
+        "username": "X6MLJp",
+        "password": "$2a$10$It0vQzlsKmhl/AAtg31Vce31BWeuBZ/XODRoslAXQwBAQfaIpk1ZG",
+        "name": "Murka kisa",
+        "role": "USER",
+        "accounts": [
+            
+        ]
+    }
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic WDZNTEpwOlNNVmludHcxODMlJg==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:50 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 154,
+    "username": "X6MLJp",
+    "password": "$2a$10$It0vQzlsKmhl/AAtg31Vce31BWeuBZ/XODRoslAXQwBAQfaIpk1ZG",
+    "name": "Murka kisa",
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	PUT
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NFJpRDlVMkIzT0JoaElVOklIQ2VsY3AxMDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "name": "Murka kisa"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:50 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "message": "Profile updated successfully",
+    "customer": {
+        "id": 155,
+        "username": "4RiD9U2B3OBhhIU",
+        "password": "$2a$10$OuD7ekZFKO7sTgfXkxhUEe9/6b8B69kZrKGEto4BQR8BVIkID6FvO",
+        "name": "Murka kisa",
+        "role": "USER",
+        "accounts": [
+            
+        ]
+    }
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic NFJpRDlVMkIzT0JoaElVOklIQ2VsY3AxMDIlJQ==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:50 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 155,
+    "username": "4RiD9U2B3OBhhIU",
+    "password": "$2a$10$OuD7ekZFKO7sTgfXkxhUEe9/6b8B69kZrKGEto4BQR8BVIkID6FvO",
+    "name": "Murka kisa",
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	PUT
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic WDZNTEpwOlNNVmludHcxODMlJg==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "name": "M k"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:50 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "message": "Profile updated successfully",
+    "customer": {
+        "id": 154,
+        "username": "X6MLJp",
+        "password": "$2a$10$It0vQzlsKmhl/AAtg31Vce31BWeuBZ/XODRoslAXQwBAQfaIpk1ZG",
+        "name": "M k",
+        "role": "USER",
+        "accounts": [
+            
+        ]
+    }
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic WDZNTEpwOlNNVmludHcxODMlJg==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:50 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 154,
+    "username": "X6MLJp",
+    "password": "$2a$10$It0vQzlsKmhl/AAtg31Vce31BWeuBZ/XODRoslAXQwBAQfaIpk1ZG",
+    "name": "M k",
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	PUT
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic WDZNTEpwOlNNVmludHcxODMlJg==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:51 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "message": "Profile updated successfully",
+    "customer": {
+        "id": 154,
+        "username": "X6MLJp",
+        "password": "$2a$10$It0vQzlsKmhl/AAtg31Vce31BWeuBZ/XODRoslAXQwBAQfaIpk1ZG",
+        "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "role": "USER",
+        "accounts": [
+            
+        ]
+    }
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic WDZNTEpwOlNNVmludHcxODMlJg==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:51 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 154,
+    "username": "X6MLJp",
+    "password": "$2a$10$It0vQzlsKmhl/AAtg31Vce31BWeuBZ/XODRoslAXQwBAQfaIpk1ZG",
+    "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic WDZNTEpwOlNNVmludHcxODMlJg==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:51 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 154,
+    "username": "X6MLJp",
+    "password": "$2a$10$It0vQzlsKmhl/AAtg31Vce31BWeuBZ/XODRoslAXQwBAQfaIpk1ZG",
+    "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	PUT
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic YWRtaW46YWRtaW4=
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "name": "Мурзик"
+}
+HTTP/1.1 403 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:51 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "timestamp": "2025-10-08T20:35:52.268+00:00",
+    "status": 403,
+    "error": "Forbidden",
+    "path": "/api/v1/customer/profile"
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic WDZNTEpwOlNNVmludHcxODMlJg==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:52 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 154,
+    "username": "X6MLJp",
+    "password": "$2a$10$It0vQzlsKmhl/AAtg31Vce31BWeuBZ/XODRoslAXQwBAQfaIpk1ZG",
+    "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+Request method:	GET
+Request URI:	http://host.docker.internal:4111/api/v1/customer/profile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				Authorization=Basic WDZNTEpwOlNNVmludHcxODMlJg==
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 08 Oct 2025 20:35:52 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+    "id": 154,
+    "username": "X6MLJp",
+    "password": "$2a$10$It0vQzlsKmhl/AAtg31Vce31BWeuBZ/XODRoslAXQwBAQfaIpk1ZG",
+    "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "role": "USER",
+    "accounts": [
+        
+    ]
+}
+>>> Running surefire-report:report
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< org.example:TestNbank >------------------------
+[INFO] Building TestNbank 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> surefire-report:3.2.5:report (default-cli) > [surefire]test @ TestNbank >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ TestNbank ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ TestNbank ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ TestNbank ---
+[INFO] skip non existing resourceDirectory /app/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ TestNbank ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ TestNbank ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] <<< surefire-report:3.2.5:report (default-cli) < [surefire]test @ TestNbank <<<
+[INFO] 
+[INFO] 
+[INFO] --- surefire-report:3.2.5:report (default-cli) @ TestNbank ---
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/skins/maven-default-skin/1.3/maven-default-skin-1.3.jar
+Progress (1): 0.9/14 kBProgress (1): 2.3/14 kBProgress (1): 3.6/14 kBProgress (1): 3.7/14 kBProgress (1): 5.1/14 kBProgress (1): 6.5/14 kBProgress (1): 7.8/14 kBProgress (1): 9.2/14 kBProgress (1): 11/14 kB Progress (1): 12/14 kBProgress (1): 13/14 kBProgress (1): 14 kB                      Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/skins/maven-default-skin/1.3/maven-default-skin-1.3.jar (14 kB at 24 kB/s)
+[INFO] Rendering content with org.apache.maven.skins:maven-default-skin:jar:1.3 skin.
+[WARNING] Unable to locate Test Source XRef to link to - DISABLED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.332 s
+[INFO] Finished at: 2025-10-08T20:35:58Z
+[INFO] ------------------------------------------------------------------------
