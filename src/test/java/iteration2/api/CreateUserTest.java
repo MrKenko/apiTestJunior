@@ -46,10 +46,10 @@ public class CreateUserTest extends BaseTest{
     }
 public static Stream<Arguments> userInvalidData(){
         return Stream.of(
-                Arguments.of("  ", "Password33!", "USER", "username", List.of("Username cannot be blank", "Username must contain only letters, digits, dashes, underscores, and dots")),
-                Arguments.of("ab", "Password33!", "USER", "username" , "Username must be between 3 and 15 characters"),
-                Arguments.of("abc$", "Password33!", "USER", "username", "Username must contain only letters, digits, dashes, underscores, and dots"),
-                Arguments.of("abc%", "Password33!", "USER", "username", "Username must contain only letters, digits, dashes, underscores, and dots")
+                Arguments.of("  ", "Password33!", "USER", "username", List.of("Username cannot be blank", "Username must be between 3 and 15 characters", "Username must contain only letters, digits, dashes, underscores, and dots")),
+                Arguments.of("ab", "Password33!", "USER", "username" , List.of("Username must be between 3 and 15 characters")),
+                Arguments.of("abc$", "Password33!", "USER", "username", List.of("Username must contain only letters, digits, dashes, underscores, and dots")),
+                Arguments.of("abc%", "Password33!", "USER", "username", List.of("Username must contain only letters, digits, dashes, underscores, and dots"))
         );
 }
 

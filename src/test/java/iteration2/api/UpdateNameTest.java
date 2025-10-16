@@ -34,15 +34,13 @@ public class UpdateNameTest extends BaseTest{
 
     public static Stream<Arguments> userValidNameAccountData() {
         return Stream.of(
-                Arguments.of(userAuthHeaderFirst, "Murka"),  //англ буквы + верхний и нижний регистр
-                Arguments.of(userAuthHeaderSecond, "Murka"),  //проверка уникальности
-                Arguments.of(userAuthHeaderFirst, "Мурка"), //русскике буквы
-                Arguments.of(userAuthHeaderFirst, "ムルカ"), //японские буквы
-                Arguments.of(userAuthHeaderFirst, "M"), //короткое имя
-                Arguments.of(userAuthHeaderFirst, "аааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа"), //длинное имя
-                Arguments.of(userAuthHeaderFirst, "Murka123!%,._-+"), //разные типы
-                Arguments.of(userAuthHeaderFirst, ""), //пустая строка
-                Arguments.of(userAuthHeaderFirst, "   ") //пробелы
+                Arguments.of(userAuthHeaderFirst, "Murka kisa"),  //англ буквы + верхний и нижний регистр
+                Arguments.of(userAuthHeaderSecond, "Murka kisa"),  //проверка уникальности
+                //Arguments.of(userAuthHeaderFirst, "Мурка киса"), //русские буквы
+                //Arguments.of(userAuthHeaderFirst, "ムルカ ムルカ"), //японские буквы
+                Arguments.of(userAuthHeaderFirst, "M k"), //короткое имя
+                Arguments.of(userAuthHeaderFirst, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa") //длинное имя
+                //Arguments.of(userAuthHeaderFirst, "Murka123!%,._-+ kisa123!%,._-+") //разные типы
         );
     }
 

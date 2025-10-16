@@ -21,6 +21,24 @@ public class Config {
     }
 
     public static String getProperty(String key){
+        //Приоритет 1 - переменная система baseApiUrl =.. - если есть, то обращаемся к ней
+        String systemValue = System.getProperty(key);
+
+        if(systemValue != null){
+            return systemValue;
+        }
+
+        //Если переменной системы нет, то
+        //Приоритет 2 = переменная окружения baseApiUrl - BASEAPIURL
+        //admin.username -> ADMIN_USERNAME
+        String envKey = key.toUpperCase().replace('.', '_');
+        String envValue = System.getenv(envKey);
+        if(envValue != null){
+            return envValue;
+        }
+
+        //Приоритет 3 - это config.properties
+
         return INSTANCE.properties.getProperty(key);
     }
 }
