@@ -29,5 +29,8 @@ jobs:
       - name: Set up services
         run: cd infra/docker_compose && bash restart_docker.sh && cd ../..
 
+      - name: Grant execute permission for mvnw
+        run: chmod +x mvnw
+
       - name: Run tests
-        run: ./mvnw clean tests
+        run: ./mvnw clean test
