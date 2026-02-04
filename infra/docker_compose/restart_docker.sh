@@ -1,4 +1,7 @@
 #!/bin/bash
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$SCRIPT_DIR"
+json_file="$SCRIPT_DIR/config/browsers.json"
 
 echo ">>> Остановить Docker Compose"
 docker compose down
@@ -12,6 +15,10 @@ if ! command -v jq &> /dev/null; then
 fi
 
 # Извлекаем все значения .image через jq
+if [ ! -f "$json_file" ]; then
+    echo "browsers.json not found at: $json_file"
+    exit 1
+fi
 images=$(jq -r '.. | objects | select(.image) | .image' "$json_file")
 
 # Пробегаем по каждому образу и выполняем docker pull
