@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+
 @Getter
 public class UserDashboard extends BasePage<UserDashboard> {
     private final SelenideElement welcomeText = $(Selectors.byClassName("welcome-text"));
@@ -22,23 +23,23 @@ public class UserDashboard extends BasePage<UserDashboard> {
         return "/dashboard";
     }
 
-    public UserDashboard createNewAccount(){
+    public UserDashboard createNewAccount() {
         createNewAccount.click();
         return this;
     }
 
-    public UserDashboard depositMoneyButton(){
+    public UserDashboard depositMoneyButton() {
         depositMoneyButton.click();
         $(Selectors.byText("\uD83D\uDCB0 Deposit Money")).shouldBe(Condition.visible);
         return this;
     }
 
-    public UserDashboard makeATransfer(){
+    public UserDashboard makeATransfer() {
         makeATransfer.click();
         return this;
     }
 
-    public UserDashboard userNameButton(){
+    public UserDashboard userNameButton() {
         userNameButton.click();
         $(Selectors.byText("✏\uFE0F Edit Profile")).shouldBe(Condition.visible);
         return this;

@@ -11,7 +11,7 @@ public class AdminSessionExtension implements BeforeEachCallback {
     public void beforeEach(ExtensionContext context) throws Exception {
         //Проверка есть у теста аннотация AdminSession
         AdminSession annotation = context.getRequiredTestMethod().getAnnotation(AdminSession.class);
-        if (annotation != null){ // ШАГ 2: если есть, добавляем в local storage токен админа
+        if (annotation != null) { // ШАГ 2: если есть, добавляем в local storage токен админа
             BasePage.authAsUser(CreateUserRequest.getAdmin());
         }
     }

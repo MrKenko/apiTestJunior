@@ -32,7 +32,8 @@ Authorization: Basic a3NhdGUxOTk4MjpLYXRlMTk5ODEh
 
 {
   "id": 27,
-  "balance": 50,00
+  "balance": 50,
+  00
 }
 
 ### Deposite money for User1 (1 копейка - проверка минимума) 200 ok

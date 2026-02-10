@@ -1,21 +1,24 @@
 package api.requests.skelethon.reauests;
 
-import api.requests.skelethon.interfaces.GetAllEndpointInterface;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 import api.models.BaseModel;
 import api.requests.skelethon.Endpoint;
 import api.requests.skelethon.HttpRequest;
 import api.requests.skelethon.interfaces.CrudEndpointInterface;
+import api.requests.skelethon.interfaces.GetAllEndpointInterface;
+import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
-public class ValidatedCrudRequester<T extends BaseModel> extends HttpRequest implements CrudEndpointInterface, GetAllEndpointInterface {
+public class ValidatedCrudRequester<T extends BaseModel> extends HttpRequest
+        implements CrudEndpointInterface, GetAllEndpointInterface {
     private CrudRequester crudRequester;
 
-    public ValidatedCrudRequester(RequestSpecification requestSpecification, Endpoint endpoint, ResponseSpecification responseSpecification) {
+    public ValidatedCrudRequester(
+            RequestSpecification requestSpecification,
+            Endpoint endpoint,
+            ResponseSpecification responseSpecification) {
         super(requestSpecification, endpoint, responseSpecification);
         this.crudRequester = new CrudRequester(requestSpecification, endpoint, responseSpecification);
     }

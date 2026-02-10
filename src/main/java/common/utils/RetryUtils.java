@@ -15,15 +15,15 @@ public class RetryUtils {
             Supplier<T> action,
             Predicate<T> condition,
             int maxAttempts,
-            long delayMillis){
+            long delayMillis) {
         T result = null;
         int attempts = 0;
 
-        while (attempts < maxAttempts){
+        while (attempts < maxAttempts) {
             attempts++;
             result = action.get();
 
-            if(condition.test(result)){
+            if (condition.test(result)) {
                 return result;
             }
 

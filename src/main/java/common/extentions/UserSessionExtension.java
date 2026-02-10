@@ -16,12 +16,12 @@ public class UserSessionExtension implements BeforeEachCallback {
     public void beforeEach(ExtensionContext context) throws Exception {
         // Шаг1: Проверка что у теста есть аннотация UserSession
         UserSession annotation = context.getRequiredTestMethod().getAnnotation(UserSession.class);
-        if(annotation != null){
+        if (annotation != null) {
             int userCount = annotation.value();
             SessionStorage.clear();
 
             List<CreateUserRequest> users = new LinkedList<>();
-            for(int i = 0; i < userCount; i++){
+            for (int i = 0; i < userCount; i++) {
                 CreateUserRequest user = AdminSteps.createUser();
                 users.add(user);
             }

@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode(callSuper = true)
-public class LoginUserResponse extends BaseModel{
+public class LoginUserResponse extends BaseModel {
     private String username;
     private String role;
 }

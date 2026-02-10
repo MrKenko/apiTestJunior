@@ -14,8 +14,8 @@ import java.util.List;
 public class GetUserProfileResponse extends BaseModel {
     private long id;
     private String username;
-    private  String password;
-    private  String name;
+    private String password;
+    private String name;
     private String role;
     private List<AccountList> accounts;
 

@@ -11,19 +11,19 @@ public class BaseElement {
         this.element = element;
     }
 
-    protected SelenideElement find(By selector){
+    protected SelenideElement find(By selector) {
         return element.find(selector);
     }
 
-    protected SelenideElement find(String cssSelector){
+    protected SelenideElement find(String cssSelector) {
         return element.find(cssSelector);
     }
 
-    protected ElementsCollection findAll(By selector){
+    protected ElementsCollection findAll(By selector) {
         return element.findAll(selector);
     }
 
-    protected ElementsCollection findAll(String cssSelector){
+    protected ElementsCollection findAll(String cssSelector) {
         return element.findAll(cssSelector);
     }
 }

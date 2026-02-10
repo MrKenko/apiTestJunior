@@ -1,14 +1,15 @@
 package api.specs;
 
 import api.configs.Config;
+import api.models.LoginUserRequest;
+import api.requests.skelethon.Endpoint;
+import api.requests.skelethon.reauests.CrudRequester;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import api.models.LoginUserRequest;
-import api.requests.skelethon.Endpoint;
-import api.requests.skelethon.reauests.CrudRequester;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,44 +18,42 @@ import java.util.Map;
 public class RequestSpecs {
     private static Map<String, String> authHeaders = new HashMap<>(Map.of("admin", "Basic YWRtaW46YWRtaW4="));
 
+    private RequestSpecs() {}
 
-    private RequestSpecs(){};
-
-
-
-    private static RequestSpecBuilder defaultRequestBuilder(){
+    private static RequestSpecBuilder defaultRequestBuilder() {
         return new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
                 .setAccept(ContentType.JSON)
                 .addFilters(List.of(new RequestLoggingFilter(),
-                        new ResponseLoggingFilter()))
+                        new ResponseLoggingFilter(), new AllureRestAssured()))
                 .setBaseUri(Config.getProperty("apiBaseUrl") + Config.getProperty("apiVersion"));
     }
 
-    public static RequestSpecification unauthSpec(){
+    public static RequestSpecification unauthSpec() {
         return defaultRequestBuilder().build();
     }
 
-    public static RequestSpecification adminSpec(){
+    public static RequestSpecification adminSpec() {
         return defaultRequestBuilder()
                 .addHeader("Authorization", authHeaders.get("admin"))
                 .build();
     }
 
-    public static RequestSpecification userSpec(String autToken){
+    public static RequestSpecification userSpec(String autToken) {
         return defaultRequestBuilder()
                 .addHeader("Authorization", autToken)
                 .build();
     }
 
-    public static RequestSpecification authAsUser(String username, String password){
+    public static RequestSpecification authAsUser(String username, String password) {
         return defaultRequestBuilder()
                 .addHeader("Authorization", getUserAuthHeader(username, password))
                 .build();
     }
-    public static String getUserAuthHeader(String username, String password){
+
+    public static String getUserAuthHeader(String username, String password) {
         String userAuthHeader;
-        if(!authHeaders.containsKey(username)) {
+        if (!authHeaders.containsKey(username)) {
 
             userAuthHeader = new CrudRequester(
                     RequestSpecs.unauthSpec(),
@@ -65,7 +64,7 @@ public class RequestSpecs {
                     .header("Authorization");
 
             authHeaders.put(username, userAuthHeader);
-        }else {
+        } else {
             userAuthHeader = authHeaders.get(username);
         }
 

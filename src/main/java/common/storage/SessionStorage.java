@@ -12,40 +12,42 @@ public class SessionStorage {
 
     private final LinkedHashMap<CreateUserRequest, UserSteps> userStepsMap = new LinkedHashMap<>();
 
-    private SessionStorage() {}
+    private SessionStorage() {
+    }
 
-    public static void addUsers(List<CreateUserRequest> users){
-        for (CreateUserRequest user: users){
+    public static void addUsers(List<CreateUserRequest> users) {
+        for (CreateUserRequest user : users) {
             INSTANCE.userStepsMap.put(user, new UserSteps(user.getUsername(), user.getPassword()));
         }
     }
 
     /**
      * Возвращаем объект CreateUserRequest по его порядковому номеру в списке созданных пользователей.
+     *
      * @param number Порядковый номер, начиная с 1 (а не с 0)
      * @return Объект CreateUserRequest, соответствующий указанному порядковому номеру.
      */
-    public static CreateUserRequest getUser(int number){
-      return new ArrayList<>(INSTANCE.userStepsMap.keySet()).get(number-1);
+    public static CreateUserRequest getUser(int number) {
+        return new ArrayList<>(INSTANCE.userStepsMap.keySet()).get(number - 1);
     }
 
-    public static CreateUserRequest getUser(){
+    public static CreateUserRequest getUser() {
         return getUser(0);
     }
 
-    public static UserSteps getSteps(int number){
-        return new ArrayList<>(INSTANCE.userStepsMap.values()).get(number-1);
+    public static UserSteps getSteps(int number) {
+        return new ArrayList<>(INSTANCE.userStepsMap.values()).get(number - 1);
     }
 
-    public static UserSteps getSteps(){
+    public static UserSteps getSteps() {
         return getSteps(1);
     }
 
-    public static String getToken(int number){
+    public static String getToken(int number) {
         return getSteps(number).getToken();
     }
 
-    public static void clear(){
+    public static void clear() {
         INSTANCE.userStepsMap.clear();
     }
 }

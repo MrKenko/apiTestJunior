@@ -8,7 +8,10 @@ public abstract class HttpRequest {
     protected Endpoint endpoint;
     protected ResponseSpecification responseSpecification;
 
-    public HttpRequest(RequestSpecification requestSpecification, Endpoint endpoint, ResponseSpecification responseSpecification) {
+    public HttpRequest(
+            RequestSpecification requestSpecification,
+            Endpoint endpoint,
+            ResponseSpecification responseSpecification) {
         this.requestSpecification = requestSpecification;
         this.endpoint = endpoint;
         this.responseSpecification = responseSpecification;

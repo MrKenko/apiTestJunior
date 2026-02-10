@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class TransferUserResponse extends BaseModel{
+public class TransferUserResponse extends BaseModel {
     private String message;
     private int senderAccountId;
     private int receiverAccountId;

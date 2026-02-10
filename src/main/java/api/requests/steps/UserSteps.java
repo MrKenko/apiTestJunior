@@ -46,10 +46,6 @@ public class UserSteps {
                 .header("Authorization");
     }
 
-    public String getToken() {
-        return token;
-    }
-
     public static int createAccount(String authHeader) {
         return new CrudRequester(
                 RequestSpecs.userSpec(authHeader),
@@ -58,15 +54,6 @@ public class UserSteps {
                 .post(null)
                 .extract()
                 .path("id");
-    }
-    public String createAccountAndGetNumberUi() {
-        CreateAccountResponse response = new ValidatedCrudRequester<CreateAccountResponse>(
-                RequestSpecs.authAsUser(username, password),
-                Endpoint.ACCOUNTS,
-                ResponseSpecs.entityWasCreated())
-                .post(null);
-
-        return response.getAccountNumber();
     }
 
     public static String createAccountAndGetNumber(String authHeader) {
@@ -81,7 +68,7 @@ public class UserSteps {
 
     public static int getUserProfile(String authHeader) {
 
-       return new CrudRequester(
+        return new CrudRequester(
                 RequestSpecs.userSpec(authHeader),
                 Endpoint.GET_USER_PROFILE,
                 ResponseSpecs.requestReturnOk())
@@ -110,7 +97,10 @@ public class UserSteps {
                 .balance(balance)
                 .build();
 
-        return new ValidatedCrudRequester<DepositUserResponse>(RequestSpecs.userSpec(authUser), Endpoint.DEPOSIT, ResponseSpecs.requestReturnOk())
+        return new ValidatedCrudRequester<DepositUserResponse>(
+                RequestSpecs.userSpec(authUser),
+                Endpoint.DEPOSIT,
+                ResponseSpecs.requestReturnOk())
                 .post(depositRequest);
     }
 
@@ -140,7 +130,36 @@ public class UserSteps {
                 .get(0);
     }
 
-    public  GetUserAccountResponse getUserAccountUi() {
+    public static void userMakeTransfer(String authUser, int senderId, int receiverId, double transferBalance) {
+        TransferUserRequest transferUserRequest = TransferUserRequest.builder()
+                .senderAccountId(senderId)
+                .receiverAccountId(receiverId)
+                .amount(transferBalance)
+                .build();
+
+        new ValidatedCrudRequester<TransferUserResponse>(
+                RequestSpecs.userSpec(authUser),
+                Endpoint.TRANSFER,
+                ResponseSpecs.requestReturnOk())
+                .post(transferUserRequest);
+
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public String createAccountAndGetNumberUi() {
+        CreateAccountResponse response = new ValidatedCrudRequester<CreateAccountResponse>(
+                RequestSpecs.authAsUser(username, password),
+                Endpoint.ACCOUNTS,
+                ResponseSpecs.entityWasCreated())
+                .post(null);
+
+        return response.getAccountNumber();
+    }
+
+    public GetUserAccountResponse getUserAccountUi() {
         return new CrudRequester(
                 RequestSpecs.authAsUser(username, password),
                 Endpoint.GET_USER_ACCOUNT,
@@ -152,19 +171,7 @@ public class UserSteps {
                 .get(0);
     }
 
-    public static void userMakeTransfer(String authUser, int senderId, int receiverId, double transferBalance){
-        TransferUserRequest transferUserRequest = TransferUserRequest.builder()
-                .senderAccountId(senderId)
-                .receiverAccountId(receiverId)
-                .amount(transferBalance)
-                .build();
-
-        new ValidatedCrudRequester<TransferUserResponse>(RequestSpecs.userSpec(authUser), Endpoint.TRANSFER, ResponseSpecs.requestReturnOk())
-                .post(transferUserRequest);
-
-    }
-
-    public  List<CreateAccountResponse> getAllAccounts(){
+    public List<CreateAccountResponse> getAllAccounts() {
         return new ValidatedCrudRequester<CreateAccountResponse>(
                 RequestSpecs.authAsUser(username, password),
                 Endpoint.GET_USER_ACCOUNT,
@@ -173,4 +180,4 @@ public class UserSteps {
     }
 
 
-    }
+}

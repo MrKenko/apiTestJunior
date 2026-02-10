@@ -28,8 +28,8 @@ public enum Endpoint {
 
     DEPOSIT(
             "/accounts/deposit",
-           DepositUserRequest.class,
-           DepositUserResponse.class
+            DepositUserRequest.class,
+            DepositUserResponse.class
     ),
 
     TRANSFER(
@@ -60,12 +60,7 @@ public enum Endpoint {
             "/admin/users",
             BaseModel.class,
             GetUserProfileResponse.class
-    )
-
-    ;
-
-
-
+    );
 
 
     private final String url;
