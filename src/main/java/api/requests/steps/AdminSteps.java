@@ -7,21 +7,26 @@ import api.requests.skelethon.Endpoint;
 import api.requests.skelethon.reauests.ValidatedCrudRequester;
 import api.specs.RequestSpecs;
 import api.specs.ResponseSpecs;
+import common.helpers.StepLogger;
 
 import java.util.List;
 
 public class AdminSteps {
     public static CreateUserRequest createUser() {
-        CreateUserRequest userRequest =
-                RandomModelGenerator.generate(CreateUserRequest.class);
 
-        new ValidatedCrudRequester<CreateUserResponse>(
-                RequestSpecs.adminSpec(),
-                Endpoint.ADMIN_USER,
-                ResponseSpecs.entityWasCreated())
-                .post(userRequest);
+            CreateUserRequest userRequest =
+                    RandomModelGenerator.generate(CreateUserRequest.class);
 
-        return userRequest;
+            return StepLogger.log("Admin creates user", () -> {
+
+            new ValidatedCrudRequester<CreateUserResponse>(
+                    RequestSpecs.adminSpec(),
+                    Endpoint.ADMIN_USER,
+                    ResponseSpecs.entityWasCreated())
+                    .post(userRequest);
+
+            return userRequest;
+        });
     }
 
 //    public static GetUserProfileResponse getAllUsers(){
@@ -36,11 +41,13 @@ public class AdminSteps {
 //    }
 
     public static List<CreateUserResponse> getAllUsers() {
-        return new ValidatedCrudRequester<CreateUserResponse>(
-                RequestSpecs.adminSpec(),
-                Endpoint.ADMIN_USER,
-                ResponseSpecs.requestReturnOk()
-        ).getAll(CreateUserResponse[].class);
+        return StepLogger.log("Admin gets all users", () -> {
+            return new ValidatedCrudRequester<CreateUserResponse>(
+                    RequestSpecs.adminSpec(),
+                    Endpoint.ADMIN_USER,
+                    ResponseSpecs.requestReturnOk()
+            ).getAll(CreateUserResponse[].class);
+        });
     }
 
 }

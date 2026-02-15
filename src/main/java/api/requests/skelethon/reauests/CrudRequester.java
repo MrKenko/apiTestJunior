@@ -5,6 +5,7 @@ import api.requests.skelethon.Endpoint;
 import api.requests.skelethon.HttpRequest;
 import api.requests.skelethon.interfaces.CrudEndpointInterface;
 import api.requests.skelethon.interfaces.GetAllEndpointInterface;
+import common.helpers.StepLogger;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
@@ -22,16 +23,17 @@ public class CrudRequester extends HttpRequest implements CrudEndpointInterface,
     }
 
     @Override
-    @Step("POST запрос на {endpoint} c телом {model}")
     public ValidatableResponse post(BaseModel model) {
-        var body = model == null ? "" : model;
-        return given()
-                .spec(requestSpecification)
-                .body(body)
-                .post(endpoint.getUrl())
-                .then()
-                .assertThat()
-                .spec(responseSpecification);
+       return StepLogger.log("POST request " + endpoint.getUrl(), () -> {
+            var body = model == null ? "" : model;
+            return given()
+                    .spec(requestSpecification)
+                    .body(body)
+                    .post(endpoint.getUrl())
+                    .then()
+                    .assertThat()
+                    .spec(responseSpecification);
+       });
     }
 
     @Override

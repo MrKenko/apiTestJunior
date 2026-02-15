@@ -18,7 +18,7 @@ public class UpdateNamePage extends BasePage<UpdateNamePage> {
     }
 
     public UpdateNamePage updateName(String newName) {
-        RetryUtils.retry(
+        RetryUtils.retry("Update name " + newName,
                 () -> {
                     inputNewName.setValue(newName);
                     return Objects.requireNonNull(inputNewName.getValue());
