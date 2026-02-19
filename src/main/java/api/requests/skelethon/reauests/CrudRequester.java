@@ -1,5 +1,6 @@
 package api.requests.skelethon.reauests;
 
+import api.configs.Config;
 import api.models.BaseModel;
 import api.requests.skelethon.Endpoint;
 import api.requests.skelethon.HttpRequest;
@@ -14,6 +15,7 @@ import io.restassured.specification.ResponseSpecification;
 import static io.restassured.RestAssured.given;
 
 public class CrudRequester extends HttpRequest implements CrudEndpointInterface, GetAllEndpointInterface {
+   private final static String API_VERSION = Config.getProperty("apiVersion");
 
     public CrudRequester(
             RequestSpecification requestSpecification,
@@ -29,7 +31,7 @@ public class CrudRequester extends HttpRequest implements CrudEndpointInterface,
             return given()
                     .spec(requestSpecification)
                     .body(body)
-                    .post(endpoint.getUrl())
+                    .post(API_VERSION + endpoint.getUrl())
                     .then()
                     .assertThat()
                     .spec(responseSpecification);
@@ -42,7 +44,7 @@ public class CrudRequester extends HttpRequest implements CrudEndpointInterface,
         return given()
                 .spec(requestSpecification)
                 .body(model)
-                .put(endpoint.getUrl())
+                .put(API_VERSION + endpoint.getUrl())
                 .then()
                 .assertThat()
                 .spec(responseSpecification);
@@ -53,7 +55,7 @@ public class CrudRequester extends HttpRequest implements CrudEndpointInterface,
     public ValidatableResponse get() {
         return given()
                 .spec(requestSpecification)
-                .get(endpoint.getUrl())
+                .get(API_VERSION + endpoint.getUrl())
                 .then()
                 .assertThat()
                 .spec(responseSpecification);
@@ -76,7 +78,7 @@ public class CrudRequester extends HttpRequest implements CrudEndpointInterface,
     public ValidatableResponse getAll(Class<?> clazz) {
         return given()
                 .spec(requestSpecification)
-                .get(endpoint.getUrl())
+                .get(API_VERSION + endpoint.getUrl())
                 .then().assertThat()
                 .spec(responseSpecification);
     }
